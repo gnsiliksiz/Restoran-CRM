@@ -1,0 +1,104 @@
+﻿@model ibernsof_Restoran.Models.CarouselOne
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h5 class="content-header-title float-left pr-1 mb-0">Ekle</h5>
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb p-0 mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="../AdminHome/Index"><i class="bx bx-home-alt"></i></a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="../Index">Carousel One</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                           Carousel One Ekle
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card card-danger">
+    <div class="card-header">
+        <h3 class="card-title"><b>Yeni reklam Ekle</b></h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+
+    <div class="card-body">
+
+        @using (Html.BeginForm("Create", "CarouselOne", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Reklam Cart Header</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.reklamHeader, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.reklamHeader, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Reklam Aciklama Header</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.reklamAciklamaHeader, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.reklamAciklamaHeader, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Reklam Açıklama</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.reklamAciklama, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.reklamAciklama, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Reklam Fotoğraf</label>
+                <div class="col-md-10">
+                    <input type="file" name="reklamResim" id="reklamResim" value="" accept=".jpg,.png,.gif,.JPEG,.jpeg" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.reklamResim, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Reklam Gosterim sirasi</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.reklamSira, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.reklamSira, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-4 col-12">
+                <div class="card invoice-action-wrapper shadow-none border">
+
+                    <div class="invoice-action-btn">
+                        <button class="btn btn-light-primary btn-block">
+                            <i class="bx bx-group"><span>Ekle</span></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+</div>
+

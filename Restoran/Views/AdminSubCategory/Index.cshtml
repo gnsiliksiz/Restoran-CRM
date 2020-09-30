@@ -1,0 +1,146 @@
+﻿@using ibernsof_Restoran.Models
+@model List<AltKategori>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="breadcrumb-wrapper col-12">
+    <ol class="breadcrumb p-0 mb-0">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index","AdminHome")"><i class="bx bx-home-alt"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active">
+            Alt Kategoriler
+        </li>
+    </ol>
+</div>
+<br />
+
+
+<div class="col-xl-3 col-md-4 col-3" align="right">
+    <div class="card invoice-action-wrapper shadow-none border">
+
+        <div class="invoice-action-btn">
+            <button class="btn btn-light-primary btn-block">
+                <a href="/AdminSubCategory/Create/">   <i class="bx bxs-categories"><span>Yeni Alt Kategori Ekle</span></i></a>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- table strip dark -->
+<div class="table-responsive">
+    <table class="table table-striped mb-0">
+        <thead>
+            <tr>
+                <th>Kategori Resim</th>
+                <th>Kategori AD</th>
+                <th>Kategori Sira</th>
+                <th>Kategori Durum</th>
+                <th>Kategori Ust</th>
+
+                <th>DÜZENLE/Sil</th>
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {@Html.Hidden("altKatID")
+
+            <tr>
+
+                <td>
+                    @if (item.altKatResim != null)
+                    {
+                        <img src="@item.altKatResim" alt="@item.altKatID" class="rounded-circle" height="30" width="30" />
+                    }
+                </td>
+                <td><button type="button" class="btn btn-light-info btn-sm" onclick="@("window.location.href='"+Url.Action("KategoriDetay","AdminSubCategory",new { id = item.altKatID }) + "'");"><i class="fas fa-pencil-alt">@item.altKatAdi</i> </button></td>
+                <td>
+                    <span class="bullet bullet-info bullet-xs"></span>
+                    <small class="text-muted">@item.altKatsira</small>
+                </td>
+                <td>
+
+                    @if (item.altKatDurum == true)
+                    {
+
+                        <small class="badge badge-light-success badge-pill">Aktif</small>
+                    }
+                    else
+                    {
+
+                        <small class="badge badge-light-warning badge-pill">
+
+                            Pasif
+
+                        </small>
+                    }
+
+                </td>
+                <td>
+                    <span class="bullet bullet-info bullet-xs"></span>
+                    <small class="text-muted">@item.Kategori.kategoriAd</small>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-light-danger btn-sm" data-toggle="modal" data-target="#DeleteConfirmation" onclick="DeleteAltKategoriRecord(@item.altKatID)"><i class="bx bx-trash-alt"></i></button>
+                    <button type="button" class="btn btn-light-info btn-sm" onclick="@("window.location.href='"+Url.Action("Edit","AdminSubCategory", new { altKatID = item.altKatID }) + "'");"><i class="bx bx-pencil"></i> </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<!-- DELETE MODAL -->
+<div class="modal fade" id="DeleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Kategori Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Seçilen kategoriyi silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-danger" onclick="ConfirmDelete()">Onayla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //Show The Popup Modal For DeleteComfirmation
+    var DeleteAltKategoriRecord = function (altKatID) {
+        $("#altKatID").val(altKatID);
+        $("#DeleteConfirmation").modal("show");
+    }
+    var ConfirmDelete = function () {
+        var altKatID = $("#altKatID").val();
+        $.ajax({
+            type: "POST",
+            url: "/AdminSubCategory/DeleteAltKategoriRecord?altKatID=" + altKatID,
+            success: function (result) {
+                if (result == true) {
+
+                    alert("Silme islemi Basarili!..");
+                    window.location.href = "/AdminSubCategory/Index";
+                    $("#DeleteConfirmation").modal("hide");
+                    $("#modal .close").click();
+                } else {
+                     alert("Önce baglı olan ürünleri siliniz!..");
+                }
+            }
+        })
+    }
+</script>

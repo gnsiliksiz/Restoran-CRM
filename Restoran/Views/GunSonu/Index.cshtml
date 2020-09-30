@@ -1,0 +1,126 @@
+﻿@using ibernsof_Restoran.Models
+@model  List<EndOfDayModel>
+
+@{
+    ViewBag.Title = "Gün Sonu";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h5 class="content-header-title float-left pr-1 mb-0">Gün Sonu</h5>
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb p-0 mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="../AdminHome/Index"><i class="bx bx-home-alt"></i></a>
+                        </li>
+
+                        <li class="breadcrumb-item active">
+                            Özet
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Column selectors with Export Options and print table -->
+<section id="column-selectors">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+
+                        <div class="table-responsive">
+                            <table class="table table-striped dataex-html5-selectors">
+                                <thead>
+                                    <tr>
+                                        <th>Ürün Adı</th>
+                                        <th>Ürün Toplam Miktar</th>
+                                        <th>Ürün Toplam Fiyatı</th>
+                                        @*<th>Toplam</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (ViewBag.Test == 0)
+                                    {
+                                        @*<tr>
+                                             <td></td>
+                                            <td></td>
+                                              <td></td>
+
+                                              </tr>*@
+                                    }
+                                    else
+                                    {
+
+                                        foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.urunAd</td>
+                                                <td>@item.urunToplamMiktar</td>
+                                                <td>@item.urunToplamFiyat₺</td>
+                                                @* <td></td>*@
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+
+                                <tfoot>
+
+                                    <tr>
+                                        <td>
+                                            <h6 class="text-primary">
+                                                Sipariş Adet :&nbsp;<small class="text-muted"> @ViewBag.siparisAdet</small>
+
+
+                                                <span></span>
+                                            </h6>
+                                        </td>
+                                        <td>
+                                            <h6 class="text-primary">
+                                                Nakit Toplam :&nbsp;<small class="text-muted"> @Math.Round(ViewBag.nakitTutar, 2)₺</small>
+                                                &nbsp;&nbsp;&nbsp;&nbsp; Pos Toplam :&nbsp;<small class="text-muted">
+                                                    @Math.Round(ViewBag.posTutar, 2)₺
+                                                </small>
+
+
+                                                <span></span>
+                                            </h6>
+                                        </td>
+                                        @*<td>
+
+
+                                                <h6 class="text-primary">
+                                                    Pos Toplam :&nbsp;<small class="text-muted">@Math.Round(ViewBag.posTutar, 2)</small>
+
+
+                                                    <span></span>
+                                                </h6>
+
+
+                                            </td>*@
+                                        <td>
+                                            <h6 class="text-primary">
+                                                Toplam Tutar :&nbsp;<small class="text-muted">@Math.Round(ViewBag.toplamTutar, 2)₺ </small>
+                                            </h6>
+                                        </td>
+                                    </tr>
+
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Column selectors with Export Options and print table -->

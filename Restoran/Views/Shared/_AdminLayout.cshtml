@@ -1,0 +1,467 @@
+﻿@{
+    if (Session["username"] == null)
+    {
+        Response.Redirect("~/Login/Index");
+    }
+}
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
+    <title>GRMS</title>
+    <link rel="apple-touch-icon" href="~/Content/app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/app-assets/images/ico/favicon.png">
+
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+    @*<link href=" https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">*@
+    @*
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>*@
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/extensions/dragula.min.css">
+    <!-- BEGIN: Vendor CSS-->
+
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/extensions/shepherd-theme-default.css">
+    <!-- END: Vendor CSS-->
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/themes/semi-dark-layout.css">
+    <!-- END: Theme CSS-->
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/pages/dashboard-analytics.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/plugins/tour/tour.css">
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css">
+    <!-- END: Custom CSS-->
+    <!--DATE TIME PICKER-->
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/tables/datatable/datatables.min.css">
+  
+    <link href="~/WebContent/RestoranCss.css" rel="stylesheet" />
+
+</head>
+<!-- END: Head-->
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern boxicon-layout no-card-shadow 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+    <!-- BEGIN: Header-->
+    <div class="header-navbar-shadow"></div>
+    <nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item mobile-menu d-xl-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ficon bx bx-menu"></i></a></li>
+                        </ul>
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item d-none d-lg-block">
+
+                                <div class="bookmark-input search-input">
+                                    <div class="bookmark-input-icon"><i class="bx bx-search primary"></i></div>
+                                    <input class="form-control input" type="text" placeholder="Ara..." tabindex="0" data-search="template-list">
+                                    <ul class="search-list"></ul>
+                                </div>
+                            </li>
+                        </ul>
+
+
+                    </div>
+                    <ul class="nav navbar-nav float-right">
+                        <li class="nav-item d-none d-lg-block">  <a class="nav-link nav-link-expand" href="../Login/Index"><i class="bx bx-power-off mr-50"></i> Çıkış Yap</a></li>
+
+                        <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand"><i class="ficon bx bx-fullscreen"></i></a></li>
+                        <li class="nav-item nav-search">
+                            <a class="nav-link nav-link-search"><i class="ficon bx bx-search"></i></a>
+                            <div class="search-input">
+                                <div class="search-input-icon"><i class="bx bx-search primary"></i></div>
+                                <input class="input" type="text" placeholder="Ara..." tabindex="-1" data-search="template-list">
+                                <div class="search-input-close"><i class="bx bx-x"></i></div>
+                                <ul class="search-list"></ul>
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Header-->
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav flex-row">
+                <li class="nav-item mr-auto">
+                    <a class="navbar-brand" href="@Url.Action("Index","AdminHome")">
+                        <div class="brand">
+
+
+                            <img src="~/Content/app-assets/logo.png" style="  height: 75px;    width:    160px;" />
+
+                        </div>
+
+                        <h2 class="brand-text mb-0"></h2>
+                    </a>
+                </li>
+                <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="bx bx-x d-block d-xl-none font-medium-4 secondary toggle-icon"></i><i class="toggle-icon bx bx-disc font-medium-4 d-none d-xl-block collapse-toggle-icon primary" data-ticon="bx-disc"></i></a></li>
+            </ul>
+        </div>
+
+        <div class="shadow-bottom"></div>
+
+        <br />
+        <div class="main-menu-content">
+            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation" data-icon-style="">
+
+                <li class=" nav-item">
+
+                    <a href="@Url.Action("Index","AdminHome")"><i class="bx bx-home"></i><span class="menu-title" data-i18n="User Profile">ANASAYFA</span></a>
+                </li>
+                <li class=" navigation-header">
+
+                    <span class="text-warning"><b>MENU YONETİMİ</b></span>
+                </li>
+                <li class=" nav-item">
+                    <a href="#"><i class="bx bx-menu"></i><span class="menu-title" data-i18n="Dashboard">MENU AYARLARIM </span><span class="badge badge-light-danger badge-pill badge-round float-right mr-2"></span></a>
+                    <ul class="menu-content">
+
+
+
+                        <li class=" nav-item">
+                            <a href="@Url.Action("Index","Urun")"><i class="bx bxl-product-hunt"></i><span class="menu-title" data-i18n="User Profile">ÜRÜNLER</span></a>
+                        </li>
+                        <li class=" nav-item">
+                            <a href="@Url.Action("Index","AdminExtraUrun")"><i class="bx bx-menu-alt-right"></i><span class="menu-title" data-i18n="User Profile">ALT ÜRÜN EKLE</span></a>
+                        </li>
+                        <li class=" nav-item">
+                            <a href="@Url.Action("Index","AdminSizeProduct")"><i class="bx bx-menu-alt-right"></i><span class="menu-title" data-i18n="User Profile"> ÜRÜN PORSİYON EKLE</span></a>
+                        </li>
+
+                    </ul>
+
+                </li>
+                <li class=" navigation-header">
+
+                    <span class="text-black-50"><b>STOK YONETİMİ</b></span>
+                </li>
+                <li class=" nav-item">
+                    <a href="@Url.Action("Index","AdminStok")"><i class="bx bx-alarm"></i><span class="menu-title" data-i18n="User Profile">ÜRÜN STOK</span></a>
+                </li>
+                <li class=" navigation-header">
+
+                    <span class="text-warning"><b>KATEGORİ YONETİMİ</b></span>
+                </li>
+                <li class=" nav-item">
+                    <a href="#"><i class="bx bx-menu"></i><span class="menu-title" data-i18n="Dashboard">KATEGORI </span><span class="badge badge-light-danger badge-pill badge-round float-right mr-2"></span></a>
+                    <ul class="menu-content">
+
+
+                        <li>
+                            <a href="@Url.Action("Index","AdminKategori")"><i class="bx bxs-categories"></i><span class="menu-item" data-i18n="eCommerce">KATEGORİLER</span></a>
+
+
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","AdminSubCategory")"><i class="bx bxs-categories"></i><span class="menu-item" data-i18n="eCommerce">ALT KATEGORİLER</span></a>
+
+
+                        </li>
+
+
+                    </ul>
+
+                </li>
+
+                <li class=" navigation-header">
+                    <span class="text-black-50"><b>MASA YONETİMİ</b></span>
+                </li>
+
+                <li class=" nav-item">
+                    <a href="@Url.Action("Index","AdminGarson")"><i class="bx bx-table"></i><span class="menu-title" data-i18n="User Profile">MASA TAKİP</span></a>
+                </li>
+
+                <li class=" navigation-header">
+                    <span class="text-warning"><b>SİPARİŞ YONETİMİ</b></span>
+                </li>
+                <li class=" nav-item">
+                    <a href="#"><i class="bx bx-shopping-bag"></i><span class="menu-title" data-i18n="Dashboard">SİPARISLER</span><span class="badge badge-light-danger badge-pill badge-round float-right mr-2"></span></a>
+                    <ul class="menu-content">
+
+
+                        <li>
+                            <a href="@Url.Action("TumSiparis","AdminSiparis")"><i class="bx bxs-shopping-bag-alt"></i><span class="menu-item" data-i18n="eCommerce">TÜM SİPARİSLER</span></a>
+
+
+                        </li>
+                        <li>
+                            <a href="@Url.Action("MasaSiparis","AdminSiparis")"><i class="bx bxs-shopping-bag-alt"></i><span class="menu-item" data-i18n="eCommerce">MASA SİPARİSLER</span></a>
+
+
+                        </li>
+
+
+
+                    </ul>
+
+                </li>
+
+
+
+
+                <li class=" navigation-header">
+                    <span class="text-warning"><b>MUHASEBE</b></span>
+                </li>
+
+                <li class=" nav-item">
+                    <a href="#"><i class="bx bx-barcode"></i><span class="menu-title" data-i18n="Dashboard">RAPORLAR</span><span class="badge badge-light-danger badge-pill badge-round float-right mr-2"></span></a>
+                    <ul class="menu-content">
+
+                        <li class=" nav-item">
+                            <a href="@Url.Action("Index","GunSonu")"><i class="bx bx-calculator"></i><span class="menu-title" data-i18n="User Profile">GÜN SONU RAPORU</span></a>
+                        </li>
+
+                       
+
+
+                    </ul>
+
+                </li>
+
+                <li class=" navigation-header">
+                    <span class="text-black-50"><b>TALEP</b></span>
+                </li>
+
+                <li class=" nav-item">
+                    <a href="@Url.Action("Index","AdminMusteriIstek")"><i class="bx bx-user-circle"></i><span class="menu-title" data-i18n="User Profile">MUSTERI TALEP</span></a>
+                </li>
+
+                <li class=" navigation-header">
+                    <span class="text-warning"><b>QR KOD YONETIMI</b></span>
+                </li>
+
+                <li class=" nav-item">
+                    <a href="#"><i class="bx bx-barcode"></i><span class="menu-title" data-i18n="Dashboard">YENI QR TANIMLA</span><span class="badge badge-light-danger badge-pill badge-round float-right mr-2"></span></a>
+                    <ul class="menu-content">
+
+                        <li class=" nav-item">
+                            <a href="@Url.Action("Index","AdminMasaKategori")"><i class="ficon bx bx-carousel"></i><span class="menu-title" data-i18n="User Profile">MASA YER EKLE</span></a>
+                        </li>
+                        <li class=" nav-item">
+                            <a href="@Url.Action("Index","Masa")"><i class="ficon bx bx-barcode"></i><span class="menu-title" data-i18n="User Profile">YENİ QR TANIMLA</span></a>
+                        </li>
+
+
+                    </ul>
+
+                </li>
+
+
+                @{
+                    if (((int)Session["userYetkiID"]) == 1)
+                    {
+                        <li class=" navigation-header">
+                            <span class="text-black-50"><b>KULLANICI YONETIMI</b></span>
+                        </li>
+
+                        <li class=" nav-item">
+                            <a href="@Url.Action("Index","User")"><i class="bx bx-group"></i><span class="menu-title" data-i18n="User Profile">KULLANICILAR</span></a>
+                        </li>
+
+
+                        <li class=" navigation-header">
+                            <span class="text-warning"><b>REKLAM YÖNETİMİ</b></span>
+                        </li>
+
+                        <li class=" nav-item">
+                            <a href="#"><i class="bx bx-collapse"></i><span class="menu-title" data-i18n="Dashboard">REKLAM</span><span class="badge badge-light-danger badge-pill badge-round float-right mr-2"></span></a>
+                            <ul class="menu-content">
+
+                                <li class=" nav-item">
+                                    <a href="@Url.Action("Index","CarouselOne")"><i class="ficon bx bx-carousel"></i><span class="menu-title" data-i18n="User Profile">Carousel 1</span></a>
+                                </li>
+                                <li class=" nav-item">
+                                    <a href="@Url.Action("Index","CarouselTwo")"><i class="ficon bx bxs-carousel"></i><span class="menu-title" data-i18n="User Profile">Carousel 2</span></a>
+                                </li>
+
+
+                            </ul>
+
+                        </li>
+
+
+                    }
+                }
+
+
+            </ul>
+        </div>
+    </div>
+    <!-- END: Main Menu-->
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- Dashboard Analytics Start -->
+                <section id="dashboard-analytics">
+                    @RenderBody()
+
+
+
+                </section>
+                <!-- Dashboard Analytics end -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    <!-- demo chat-->
+    <div class="widget-chat-demo">
+        <!-- widget chat demo footer button start -->
+        @*<button class="btn btn-primary chat-demo-button glow px-1"><i class="livicon-evo" data-options="name: comments.svg; style: lines; size: 24px; strokeColor: #fff; autoPlay: true; repeat: loop;"></i></button>*@
+        <!-- widget chat demo footer button ends -->
+        <!-- widget chat demo start -->
+        <div class="widget-chat widget-chat-demo d-none">
+            <div class="card mb-0">
+                <div class="card-header border-bottom p-0">
+                    <div class="media m-75">
+                        <a href="JavaScript:void(0);">
+                            <div class="avatar mr-75">
+                                <img src="~/Content/app-assets/images/portrait/small/avatar-s-2.jpg" alt="avtar images" width="32" height="32">
+                                <span class="avatar-status-online"></span>
+                            </div>
+                        </a>
+                        <div class="media-body">
+                            <h6 class="media-heading mb-0 pt-25"><a href="javaScript:void(0);">Kiara Cruiser</a></h6>
+                            <span class="text-muted font-small-3">Active</span>
+                        </div>
+                        <i class="bx bx-x widget-chat-close float-right my-auto cursor-pointer"></i>
+                    </div>
+                </div>
+                <div class="card-body widget-chat-container widget-chat-demo-scroll">
+                    <div class="chat-content">
+                        <div class="badge badge-pill badge-light-secondary my-1">today</div>
+                        <div class="chat">
+                            <div class="chat-body">
+                                <div class="chat-message">
+                                    <p>How can we help? 😄</p>
+                                    <span class="chat-time">7:45 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat chat-left">
+                            <div class="chat-body">
+                                <div class="chat-message">
+                                    <p>Hey John, I am looking for the best admin template.</p>
+                                    <p>Could you please help me to find it out? 🤔</p>
+                                    <span class="chat-time">7:50 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat">
+                            <div class="chat-body">
+                                <div class="chat-message">
+                                    <p>Stack admin is the responsive bootstrap 4 admin template.</p>
+                                    <span class="chat-time">8:01 AM</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer border-top p-1">
+                    <form class="d-flex" onsubmit="widgetChatMessageDemo();" action="javascript:void(0);">
+                        <input type="text" class="form-control chat-message-demo mr-75" placeholder="Type here...">
+                        <button type="submit" class="btn btn-primary glow px-1"><i class="bx bx-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- widget chat demo ends -->
+
+    </div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix mb-0">
+            <span class="float-left d-inline-block">2020 &copy; ibernsoftGRMS</span><span class="float-right d-sm-inline-block d-none">Follow Us<i class="bx bxs-heart pink mx-50 font-small-3"></i>by<a class="text-uppercase" href="https://ibernsoft.com.tr/" target="_blank">IBERNSOFT</a></span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="~/Content/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="~/Content/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/extensions/dragula.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="~/Content/app-assets/js/core/app-menu.js"></script>
+    <script src="~/Content/app-assets/js/core/app.js"></script>
+    <script src="~/Content/app-assets/js/scripts/components.js"></script>
+    <script src="~/Content/app-assets/js/scripts/footer.js"></script>
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="~/Content/app-assets/js/scripts/pages/dashboard-analytics.js"></script>
+    <!-- END: Page JS-->
+    <!--DATE TİME PİCKER-->
+    <script src="~/Content/app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="~/Content/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="~/Content/app-assets/vendors/js/pickers/pickadate/picker.time.js"></script>
+    <script src="~/Content/app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="~/Content/app-assets/vendors/js/pickers/daterange/moment.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="~/Content/app-assets/js/scripts/pickers/dateTime/pick-a-datetime.js"></script>
+    <!--DATATABLES-->
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/buttons.html5.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/buttons.print.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/buttons.bootstrap.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/pdfmake.min.js"></script>
+    <script src="~/Content/app-assets/vendors/js/tables/datatable/vfs_fonts.js"></script>
+    <script src="~/Content/app-assets/js/scripts/datatables/datatable.js"></script>
+    <script src="~/Content/app-assets/js/scripts/pages/dashboard-ecommerce.js"></script>
+
+
+
+
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="~/Content/app-assets/vendors/js/extensions/shepherd.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="~/Content/app-assets/js/scripts/extensions/tour.js"></script>
+    <script src="~/Content/app-assets/js/scripts/extensions/ext-component-block-ui.js"></script>
+
+
+    <!-- END: Page JS-->
+</body>
+<!-- END: Body-->
+
+</html>

@@ -1,0 +1,62 @@
+﻿@model List<ibernsof_Restoran.Models.MusteriIstek>
+
+
+
+        @{
+            foreach (var item in Model)
+            {
+
+
+                <button class="btn btn-primary shadow mr-1 mb-1 "  onclick="#">
+                    <img src="@item.iconSinifAdi" /> &nbsp;@item.musteriIstekAdi
+
+                </button>
+
+
+                }
+            
+           
+
+          
+
+
+
+
+
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
+            <script type="text/javascript">
+                //Show The Popup Modal For DeleteComfirmation
+   
+                var musteriIstek = 0;
+
+                var EkleMusteriIstekRecord = function (musteriIstekID) {
+                    musteriIstek = musteriIstekID;
+                    alert(musteriIstek);
+                    $("#demoModal").modal("show");
+                }
+                var MusteriIstekEkle = function () {
+
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/TalepWeb/EkleMusteriIstekRecord?musteriIstekID=" + musteriIstek,
+                        success: function (result) {
+                            if (result == true) {
+                                alert("Silme islemi Basarili!..");
+                                window.location.href = "//Index";
+                                $("#demoModal").modal("hide");
+                                $("#modal .close").click();
+                            } else {
+                                alert("Istek Iletilemedi!..");
+                            }
+                        }
+                    })
+                }
+            </script>
+
+
+        }

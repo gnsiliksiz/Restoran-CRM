@@ -1,0 +1,521 @@
+﻿@model ibernsof_Restoran.Models.Home
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!-- Background variants section start -->
+<div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h5 class="content-header-title float-left pr-1 mb-0">Anasayfa</h5>
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb p-0 mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="../AdminHome/Index"><i class="bx bx-home-alt"></i></a>
+                        </li>
+
+                        <li class="breadcrumb-item active">
+                            Anasayfa
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<section id="block-examples">
+    <div class="row">
+        <div class="col-12 mt-3 mb-1">
+
+        </div>
+    </div>
+    <div class="row match-height">
+
+
+
+        <div class="col-md-4 col-sm-12">
+            <div class="card">
+                <div class="card-content">
+
+                    <div class="card-body">
+                        <div class="form-group">
+                            <div class="" align="center">
+                                <img src="~/Content/app-assets/images/home-delivery.png" alt="element 01">
+
+                            </div>
+                            <br />
+                            <p> Teslim edilen siparislerinizi buradan takip edebilirsiniz.</p>
+                            <br />
+                            <button class="btn btn-lg btn-block font-medium-1 btn-light-secondary mb-1 block-element text-nowrap" onclick="@("window.location.href='"+Url.Action("Index","AdminSiparis") + "'");">
+                                <span><i class="bx bx-bell font-size-large align-middle mr-50"></i><strong>Siparislerim</strong> </span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="card text-center">
+                <div class="card-content">
+                    <div class="card-body">
+
+                        <img src="~/Content/app-assets/images/silverware64.png" alt="element 01">
+                        <br />
+                        <br />
+                        <br />
+                        <p class="text-muted mb-0 line-ellipsis">Tamamlanan Siparis</p>
+                        <br />
+                        @{
+                            int available = 0;
+
+                        }
+                        @foreach (var item in Model.tutar)
+                        {
+
+
+                            available = available + 1;
+                        }
+                        <h2 class="mb-0"> @available </h2>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="card text-center">
+                <div class="card-content">
+                    <div class="card-body">
+
+                        <img src="~/Content/app-assets/images/online-money.png" alt="element 01">
+                        <br />
+                        <br />
+                        <br />
+                        <p class="text-muted mb-0 line-ellipsis">Toplam Kazanc</p>
+                        <br />
+                        <h2 class="mb-0"> @Math.Round((decimal)Model.tutar.Sum(t => t.fiyat), 2)<img src="~/Content/app-assets/images/turkish-lira16.png" alt="element 01"></h2>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+</section>
+
+<div class="row">
+    <!-- Activity Card Starts-->
+    <div class="col-xl-5 col-md-6 col-12 activity-card">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Güncel Durum</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body pt-1">
+                    <div class="d-flex activity-content">
+                        <div class="avatar bg-rgba-primary m-0 mr-75">
+                            <div class="avatar-content">
+                                <i class="bx bx-bar-chart-alt-2 text-primary"></i>
+                            </div>
+                        </div>
+                        <div class="activity-progress flex-grow-1">
+                            <small class="text-muted d-inline-block mb-50">Toplam Kazanc</small>
+                            <small class="float-right">@Math.Round((decimal)Model.tutar.Sum(t => t.fiyat), 2)</small>
+                            <div class="progress progress-bar-primary progress-sm">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="50" style="width:50%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex activity-content">
+                        <div class="avatar bg-rgba-success m-0 mr-75">
+                            <div class="avatar-content">
+                                <i class="bx bx-dollar text-success"></i>
+                            </div>
+                        </div>
+                        <div class="activity-progress flex-grow-1">
+                            <small class="text-muted d-inline-block mb-50">Hızlı Servis</small>
+                            @{
+                                int availabl = 0;
+
+                            }
+                            @foreach (var item in Model.siparisonay)
+                            {
+
+
+                                availabl = availabl + 1;
+                            }
+                            <small class="float-right">@availabl</small>
+                            <div class="progress progress-bar-success progress-sm">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="80" style="width:80%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex activity-content">
+                        <div class="avatar bg-rgba-warning m-0 mr-75">
+                            <div class="avatar-content">
+                                <i class="bx bx-stats text-warning"></i>
+                            </div>
+                        </div>
+                        <div class="activity-progress flex-grow-1">
+                            <small class="text-muted d-inline-block mb-50">Tamamlanan Siparis</small>
+                            @{
+                                int availab = 0;
+
+                            }
+                            @foreach (var item in Model.tutar)
+                            {
+
+
+                                availab = availab + 1;
+                            }
+                            <small class="float-right">@availab</small>
+                            <div class="progress progress-bar-warning progress-sm">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="60" style="width:60%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-75">
+                        <div class="avatar bg-rgba-danger m-0 mr-75">
+                            <div class="avatar-content">
+                                <i class="bx bx-check text-danger"></i>
+                            </div>
+                        </div>
+                        <div class="activity-progress flex-grow-1">
+                            <small class="text-muted d-inline-block mb-50">Siparis Veren Masa</small>
+                            @{
+                                int availa = 0;
+
+                            }
+                            @foreach (var item in Model.tutar)
+                            {
+
+
+                                availa = availa + 1;
+                            }
+                            <small class="float-right">@availa</small>
+                            <div class="progress progress-bar-danger progress-sm">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="30" style="width:30%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Profit Report Card Starts-->
+    <div class="col-xl-3 col-md-6 col-12 profit-report-card">
+        <div class="row">
+            <div class="col-md-12 col-sm-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="card-title">Kazanc Rapor</h4>
+                        <i class="bx bx-dots-vertical-rounded font-medium-3 cursor-pointer"></i>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body pb-0 d-flex justify-content-around">
+                            <div class="d-inline-flex mr-xl-2">
+                                <div id="profit-primary-chart"></div>
+                                <div class="profit-content ml-50 mt-50">
+                                    @{
+                                        int avail = 0;
+
+                                    }
+                                    @foreach (var item in Model.tutar)
+                                    {
+
+
+                                        avail = avail + 1;
+                                    }
+                                    <h5 class="mb-0">₺ @avail  </h5>
+                                    <small class="text-muted">@avail %</small>
+                                </div>
+                            </div>
+                            <div class="d-inline-flex">
+                                <div id="profit-info-chart"></div>
+                                <div class="profit-content ml-50 mt-50">
+                                    <h5 class="mb-0">₺ @avail  </h5>
+                                    <small class="text-muted">@avail %</small>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Onaylanan Siparis Raporu</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <div class="d-flex align-items-end justify-content-around">
+                                <div class="registration-content mr-xl-2">
+                                    @{
+                                        int avai = 0;
+
+                                    }
+                                    @foreach (var item in Model.siparisonay)
+                                    {
+
+
+                                        avai = avai + 1;
+                                    }
+                                    <h4 class="mb-0">@avai</h4>
+                                    <i class="bx bx-trending-up success align-middle"></i>
+                                    <span class="text-success">@avai%</span>
+                                </div>
+                                <div id="registration-chart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Sales Chart Starts-->
+    @*<div class="col-xl-3 col-md-6 col-12 sales-card">
+
+        </div>*@
+    <!-- Scroll - horizontal and vertical table -->
+    @*<section id="horizontal-vertical">
+        <div class="row">*@
+            <div class="col-4" >
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Azalan Ürün Stok Bilgisi</h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body card-dashboard">
+                            
+                            <div class="table-responsive">
+                                <table class="table mb-0" id="example" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th>Urun Adi</th>
+                                            <th>Kalan</th>
+                                         
+                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{ int a = 0; }
+                                        @foreach (var item in Model.urunStok)
+                                        {@Html.Hidden("urunID")
+
+                                        a++;
+                                        if (@item.urunStok <= 3)
+                                        {
+                                            <tr class="table-danger">
+                                                <td>@item.urunAd</td>
+                                                <td>@item.urunStok</td>
+
+                                            </tr>
+                                        }
+                                        if (@item.urunStok <= 7 && @item.urunStok > 3)
+                                        {
+                                            <tr class="table-warning">
+                                                <td>@item.urunAd</td>
+                                                <td>@item.urunStok</td>
+
+                                            </tr>
+                                        }
+                                        if (@item.urunStok <= 9 && @item.urunStok > 7)
+                                        {
+                                            <tr class="table-success">
+                                                <td>@item.urunAd</td>
+                                                <td>@item.urunStok</td>
+
+                                            </tr>
+                                        }
+                                        if (@item.urunStok <= 10 && @item.urunStok > 9)
+                                        {
+                                            <tr class="table-info">
+                                                <td>@item.urunAd</td>
+                                                <td>@item.urunStok</td>
+
+                                            </tr>
+                                        }
+                                    }
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @*</div>
+    </section>*@
+    <!--/ Scroll - horizontal and vertical table -->
+
+</div>
+<div class="content-body">
+    <section id="carousel">
+        <div class="row match-height">
+
+            <div class="col-lg-1">
+            </div>
+            <div class="col-lg-5">
+                <div class="card" id="basic-carousel">
+                    <div class="card-header">
+                        @Html.Hidden("reklamID")
+                        @foreach (var item in Model.header)
+                        {
+                            <h4 class="card-title">@item.reklamHeader</h4>
+                        }
+
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+
+                                    @{ int b = 0;}
+                                    @foreach (var item in Model.onelist)
+                                    {
+                                        b++;
+                                        var active = b == 1 ? "active" : "";
+
+
+                                        <li data-target="#carousel-example-caption" data-slide-to="@item.reklamSira" class="@active"></li>
+                                    }
+
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+
+                                    @{ int c = 0;}
+                                    @foreach (var item in Model.onelist)
+                                    {
+                                        c++;
+                                        var active = c == 1 ? "active" : "";
+                                        <div class=" carousel-item @active">
+                                            <img class="img-fluid" src="@item.reklamResim" alt="First slide">
+
+                                            <h3>@item.reklamAciklamaHeader</h3>
+                                            <p>
+                                                @item.reklamAciklama
+                                            </p>
+
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-5">
+                <div class="card" id="basic-carousel">
+                    <div class="card-header">
+                        @Html.Hidden("reklamtwoID")
+                        @foreach (var item in Model.headerT)
+                        {
+                            <h4 class="card-title">@item.reklamtwoHeader</h4>
+                        }
+
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+
+                            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+
+                                    @{ int j = 0;}
+                                    @foreach (var item in Model.listT)
+                                    {
+                                        j++;
+                                        var active = j == 1 ? "active" : "";
+
+
+                                        <li data-target="#carousel-example-caption" data-slide-to="@item.reklamtwoSira" class="@active"></li>
+                                    }
+
+                                </ol>
+                                <div class="carousel-inner" role="listbox">
+
+                                    @{ int i = 0;}
+                                    @foreach (var item in Model.listT)
+                                    {
+                                        i++;
+                                        var active = i == 1 ? "active" : "";
+                                        <div class=" carousel-item @active">
+                                            <img class="img-fluid" src="@item.reklamtwoResim" alt="First slide">
+
+                                            <h3>@item.reklamtwoAciklamaHeader</h3>
+                                            <p>
+                                                @item.reklamtwoAciklama
+                                            </p>
+
+                                        </div>
+                                    }
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1">
+            </div>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+@*fab bottom start*@
+<section class="faq-bottom">
+    <div class="row mb-2">
+        <div class="col-12 text-center">
+            <h2 class="faq-subtitle">Hala bir sorunuz mu var?</h2>
+            <p class="p-2 text-muted font-medium-1">
+                Her zaman bizimle iletişime geçebilirsiniz.
+            </p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center mb-5">
+        <div class="col-sm-12 col-md-4 text-center border rounded p-2 mr-md-2 m-1">
+            <i class="bx bx-phone-call primary font-large-1 text-muted p-50"></i>
+            <h5>+ (216) 511 58 02</h5>
+            <p class="text-muted font-medium-1"> Tüm soru ve şikayetleriniz için bizimle iletişime geçiniz!</p>
+        </div>
+        <div class="col-sm-12 col-md-4 text-center border color-gray-faq rounded p-2 m-1">
+            <i class="bx bx-mail-send primary font-large-1 p-50"></i>
+            <h5><a href="mailto:destek@ibernsoft.com.tr">destek@ibernsoft.com.tr</a></h5>
+            <p class="text-muted font-medium-1">Destege ihtiyacim var!</p>
+        </div>
+    </div>
+</section>
+@*fab bottom ends*@
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false
+    } );
+} );
+</script>

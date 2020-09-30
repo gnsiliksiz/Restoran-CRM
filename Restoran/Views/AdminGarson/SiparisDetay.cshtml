@@ -1,0 +1,247 @@
+﻿
+
+
+@model ibernsof_Restoran.Models.CartItem
+@{
+
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
+    <title>ibernsoftGRMS Yönetim Paneli</title>
+    <link rel="apple-touch-icon" href="~/Content/app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/Content/app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/vendors/css/vendors.min.css">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/themes/semi-dark-layout.css">
+    <!-- END: Theme CSS-->
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/pages/app-invoice.css">
+    <!-- END: Page CSS-->
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Content/assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+</head>
+<!-- END: Head-->
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern boxicon-layout no-card-shadow 2-columns  navbar-sticky footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
+
+
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+                <div class="content-header-left col-12 mb-2 mt-1">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h5 class="content-header-title float-left pr-1 mb-0">Adisyon</h5>
+                            <div class="breadcrumb-wrapper col-12">
+                                <ol class="breadcrumb p-0 mb-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="../AdminHome/Index"><i class="bx bx-home-alt"></i></a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a href="Index">Siparislerim</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">
+                                       Mutfak Detay
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+                <!-- app invoice View Page -->
+                <section class="invoice-view-wrapper">
+                    <div class="row">
+                        <!-- invoice view page -->
+                        <div class="col-xl-6 col-md-4 col-10">
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-body pb-0 mx-25">
+                                        <!-- header section -->
+                                        <div class="row">
+                                            <div class="col-xl-4 col-md-12">
+                                                <span class="invoice-number mr-50">Siparis No#</span>
+                                                @foreach (var item in Model.cartlar)
+                                                {
+                                                    <span>@item.cartNo</span>}
+                                            </div>
+                                            <div class="col-xl-8 col-md-12">
+                                                <div class="d-flex align-items-center justify-content-xl-end flex-wrap">
+                                                    <div class="mr-3">
+                                                        <small class="text-muted">Masa No:</small>
+                                                        @foreach (var item in Model.cartlar)
+                                                        {
+                                                            <span>@item.Masa.masaNo</span>}
+                                                    </div>
+                                                    <div class="mr-3">
+                                                        <small class="text-muted">Ödeme Tipi:</small>
+                                                        @foreach (var item in Model.cartlar)
+                                                        {
+                                                            <span>@item.odemeTur</span>}
+                                                    </div>
+                                                    <div>
+                                                        <small class="text-muted">Tarih:</small>
+                                                        @foreach (var item in Model.cartlar)
+                                                        {
+                                                            <span>@item.zaman</span>}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- logo and title -->
+                                        <div class="row my-3">
+                                            <div class="col-6">
+                                                <h4 class="text-primary">Adisyon</h4>
+                                                <span>Cadi Cafe</span>
+                                            </div>
+                                            <div class="col-6 d-flex justify-content-end">
+                                                <img src="~/Content/app-assets/images/logo/logo.png" alt="logo" height="46" width="164">
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- product details table-->
+                                    <div class="invoice-product-details table-responsive mx-md-100">
+                                        <table class="table table-borderless mb-0">
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th>Ürün Adı</th>
+                                                    <th>Ürün Miktar</th>
+                                                    <th>Istenilen urun</th>
+                                                    @*<th>Porsiyon</th>*@
+                                                    <th> Mesaj</th>
+
+
+
+
+
+                                                    <th>Ürün Fiyat</th>
+                                                    @*<th>Masa No</th>*@
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.cartt)
+                                                {
+                                                <tr>
+                                                    <td><span class="invoice-amount">@item.Urun.urunAd</span></td>
+                                                    <td><span class="invoice-amount">@item.miktar</span></td>
+                                                    <td><span class="invoice-amount">@item.extraUrunAdi</span></td>
+                                                    @*<td><span class="invoice-amount">@item.urunSizeID</span></td>*@
+                                                    <td><span class="invoice-amount">@item.urunMesaj</span></td>
+
+
+
+                                                    <td><span class="invoice-amount">@Math.Round((decimal)item.fiyat, 2)</span></td>
+
+
+                                                </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- invoice subtotal -->
+                                    <div class="card-body pt-0 mx-25">
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-2 col-sm-5 mt-75">
+
+                                            </div>
+                                            <div class="col-6 col-sm-6 d-flex justify-content-end mt-50">
+                                                <div class="invoice-subtotal">
+                                                    <div class="invoice-calc d-flex justify-content-between">
+                                                        <span class="invoice-title">Toplam Tutar</span>
+                                                        <span class="invoice-value">@Math.Round((decimal)Model.cartt.Sum(i => i.fiyat), 2)</span>
+                                                    </div>
+
+
+                                                    <hr>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- invoice action  -->
+                        <div class="col-xl-3 col-md-4 col-12">
+                            <div class="card invoice-action-wrapper shadow-none border">
+                                <div class="card-body">
+
+                                    <div class="invoice-action-btn">
+                                        <button class="btn btn-light-primary btn-block" onclick="window.print();">
+                                            <i class="bx bx-printer"><span>Yazdır</span></i>
+
+                                        </button>
+                                        @*<input onclick="window.print();" type="button" value="YAZDIR" />*@
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    <!-- BEGIN: Footer-->
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="~/Content/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <!-- END: Page Vendor JS-->
+    <!-- BEGIN: Theme JS-->
+    <script src="~/Content/app-assets/js/core/app-menu.js"></script>
+    <script src="~/Content/app-assets/js/core/app.js"></script>
+    <script src="~/Content/app-assets/js/scripts/components.js"></script>
+    <script src="~/Content/app-assets/js/scripts/footer.js"></script>
+    <!-- END: Theme JS-->
+    <!-- BEGIN: Page JS-->
+    <script src="~/Content/app-assets/js/scripts/pages/app-invoice.js"></script>
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>
+

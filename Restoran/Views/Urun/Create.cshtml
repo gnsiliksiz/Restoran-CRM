@@ -1,0 +1,110 @@
+﻿
+@model ibernsof_Restoran.Models.Urun
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+    <div class="content-header row">
+        <div class="content-header-left col-12 mb-2 mt-1">
+            <div class="row breadcrumbs-top">
+                <div class="col-12">
+                    <h5 class="content-header-title float-left pr-1 mb-0">Ekle</h5>
+                    <div class="breadcrumb-wrapper col-12">
+                        <ol class="breadcrumb p-0 mb-0">
+                            <li class="breadcrumb-item">
+                                <a href="../AdminHome/Index"><i class="bx bx-home-alt"></i></a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="../Index">Urun</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Urun Ekle
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="card card-danger">
+    <div class="card-header">
+        <h3 class="card-title"><b>Yeni Ürün Ekle</b></h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+
+    <div class="card-body">
+
+        @using (Html.BeginForm("Create", "Urun", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Ürün Adı</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.urunAd, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.urunAd, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Açıklama</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.urunAciklama, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.urunAciklama, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Ürün Fiyat</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.urunFiyat, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.urunFiyat, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2"> Stok Ekle</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.urunStok, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.urunStok, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Ürün Fotoğraf</label>
+                <div class="col-md-10">
+                    <input type="file" name="urunResim" id="urunResim" value="" accept=".jpg,.png,.gif,.JPEG,.jpeg" class="form-control" />
+                    @Html.ValidationMessageFor(model => model.urunResim, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Kategori Seç</label>
+                <div class="col-md-10">
+                    @Html.DropDownList("altKatID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.altKatID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-4 col-12">
+                <div class="card invoice-action-wrapper shadow-none border">
+
+                    <div class="invoice-action-btn">
+                        <button class="btn btn-light-primary btn-block">
+                            <i class="bx bx-group"><span>Ekle</span></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+    
+</div>

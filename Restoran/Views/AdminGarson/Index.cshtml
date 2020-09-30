@@ -1,0 +1,150 @@
+﻿@model ibernsof_Restoran.Models.masaKategori
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+    <div class="content-body">
+
+        <!-- Nav Justified Starts -->
+        <section id="nav-justified">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Masa Sipariş Yönetimi</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                               
+                                <ul class="nav nav-tabs nav-justified" id="myTab2" role="tablist">
+                                    @{
+                                        int a = 0;
+                                        string adi = @Session["masaKatAdi"].ToString();
+                                        adi = adi.Replace(" ", "");
+                                        int id = Convert.ToInt32(@Session["masaKatID"]);
+                                    }
+                                    @foreach (var item in Model.masaKatList)
+                                    {
+                                       
+                                    
+
+                                        if (id==@item.masaKatID)
+                                        {
+                                            
+                                            <li class="nav-item" >
+                                                <a class="nav-link active" id="@id" data-toggle="tab"  onclick="@("window.location.href='"+Url.Action("Index","AdminGarson", new { masaKatID = item.masaKatID }) + "'");" href="#@adi" role="tab" aria-controls="@adi" aria-selected="true">
+                                                   @item.masaKatAdi
+                                                </a>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item"  i>
+                                                <a class="nav-link " id="@id" data-toggle="tab" onclick="@("window.location.href='"+Url.Action("Index","AdminGarson", new { masaKatID = item.masaKatID }) + "'");" href="#@adi" role="tab" aria-controls="@adi" aria-selected="true">
+                                                    @item.masaKatAdi
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content pt-1">
+                                    @{
+                                        int a1 = 0;
+                                       
+                                    }
+                                 
+                                    @foreach (var item in Model.masaKatList)
+                                    {
+                                        a1 = a1 + 1;
+                                       
+                                        
+                                        if (a1 == 1)
+                                        {
+                                    <div class="tab-pane active" id="@adi" role="tabpanel" aria-labelledby="@id">
+
+                                 
+
+                                        @foreach (var item2 in ViewBag.result)
+
+                                        {
+                                          
+                                                
+
+
+
+
+                                                    if (item2.siparisCount > 0)
+                                                    {
+                                                        <button type="button" class="btn btn-danger shadow mr-1 mb-1" onclick="@("window.location.href='" + Url.Action("MasaDetay", "AdminGarson", new { masaID = item2.masaID }) + "'");">@item2.masaNo (@item2.siparisCount)</button>
+
+                                                    }
+
+                                                    else
+                                                    {
+
+                                                        <button type="button" class="btn btn-success shadow mr-1 mb-1" onclick="@("window.location.href='" + Url.Action("MasaDetay", "AdminGarson", new { masaID = item2.masaID }) + "'");">@item2.masaNo (@item2.siparisCount)</button>
+
+                                                    }
+
+
+                                                
+                                              
+                                        
+                                            
+                                                }
+
+                                        </div>
+                                        }
+                                        if (a != 1)
+                                        {
+                                        <div class="tab-pane"  id="@adi" role="tabpanel" aria-labelledby="@id">
+                                   
+                                            @foreach (var item3 in ViewBag.result)
+
+                                                    {
+
+                                                        if (item3.siparisCount > 0)
+                                                        {
+                                                            <button type="button" class="btn btn-danger shadow mr-1 mb-1" onclick="@("window.location.href='" + Url.Action("MasaDetay", "AdminGarson", new { masaID = item3.masaID }) + "'");">@item3.masaNo (@item3.siparisCount)</button>
+
+                                                        }
+
+                                                        else
+                                                        {
+
+                                                            <button type="button" class="btn btn-success shadow mr-1 mb-1" onclick="@("window.location.href='" + Url.Action("MasaDetay", "AdminGarson", new { masaID = item3.masaID }) + "'");">@item3.masaNo (@item3.siparisCount)</button>
+
+                                                        }
+
+
+
+
+
+
+
+            } 
+                                        </div>
+                                        }
+                                        }
+                                        <hr>
+                                    
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Nav Justified Ends -->
+
+    </div>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+
+
+
+

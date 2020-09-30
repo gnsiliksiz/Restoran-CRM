@@ -1,0 +1,370 @@
+﻿@model ibernsof_Restoran.Models.Urun
+
+@{
+    ViewBag.Title = "productDetail";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+@section Sepet{
+    <div class="col-md-2">
+        <a href="#" class="module module-cart right" data-toggle="panel-cart">
+            <span class="cart-icon">
+                <i class="ti ti-shopping-cart"></i>
+                <span class="notification">@ViewBag.count</span>
+            </span>
+            @if (ViewBag.totalprice != 0)
+            {
+                <span class="cart-value">@ViewBag.totalprice ₺</span>
+            }
+            else
+            {
+
+            }
+
+        </a>
+    </div>
+}
+
+<!-- Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 push-lg-2">
+                <!-- Product Single -->
+                <div class="product-single">
+                    <div class="product-image">
+                        @foreach (var item in Model.singleurun)
+                        {
+
+                            <img src="@item.urunResim" alt="" style="width:400px;height:300px">
+                        }
+                    </div>
+                    <div class="product-content">
+                        @foreach (var item in Model.singleurun)
+                        {
+
+                            <div class="product-header text-left">
+
+                                <h2 class="product-title">@item.urunAd</h2>
+
+                            </div>
+
+                            <p class="lead">@item.urunAciklama</p>
+                        }
+                        <hr class="hr-primary">
+
+                        <h5 class="text-center text-muted">Sipariş Detayı</h5>
+
+                        <div class="panel-details-container">
+                            <!-- Panel Details / Size -->
+                            <div class="panel-details">
+                                <h5 class="panel-details-title">
+                                    <label class="custom-control custom-radio">
+                                        <input name="radio_title_size" type="radio" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                    <a href="#panelDetailsSize" data-toggle="collapse">Porsiyon Seçiniz!</a>
+                                </h5>
+                                <div id="panelDetailsSize" class="collapse">
+                                    <div class="panel-details-content">
+
+                                        @foreach (var item in Model.sizeurun)
+                                        {
+                                            <div class="form-group">
+                                                <label class="custom-control custom-radio">
+                                                    <input name="sizeID" type="radio" value="@item.sizeID" class="custom-control-input sizeChange">
+                                                    <span class="custom-control-indicator"></span>
+                                                    <span class="custom-control-description">@item.sizeName (@Math.Round((decimal)item.sizeFiyat, 2))</span>
+                                                </label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Panel Details / Additions -->
+                            <div class="panel-details">
+                                <h5 class="panel-details-title">
+                                    <label class="custom-control custom-radio">
+                                        <input name="radio_title_additions" type="radio" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                    <a href="#panelDetailsAdditions" data-toggle="collapse">İstenilen  Ürünleri Seçiniz!</a>
+                                </h5>
+                                <div id="panelDetailsAdditions" class="collapse">
+                                    <div class="panel-details-content">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                @foreach (var item in Model.extraurunler)
+                                                {
+                                                    <div class="form-group" id="MyDiv">
+                                                        <label class="custom-control custom-checkbox">
+                                                            <input type="checkbox" name="extraUrun" value="@item.extraUrunAdi" class="custom-control-input extraChange">
+                                                            <span class="custom-control-indicator"></span>
+                                                            <span class="custom-control-description">@item.extraUrunAdi (@item.extraUrunFiyat)</span>
+                                                        </label>
+                                                    </div>
+                                                }
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Panel Details / Other -->
+                            <div class="panel-details">
+                                <h5 class="panel-details-title">
+                                    <label class="custom-control custom-radio">
+                                        <input name="radio_title_other" type="radio" class="custom-control-input">
+                                        <span class="custom-control-indicator"></span>
+                                    </label>
+                                    <a href="#panelDetailsOther" data-toggle="collapse">Diger!</a>
+                                </h5>
+                                <div id="panelDetailsOther" class="collapse">
+                                    <textarea cols="30" rows="4" class="form-control" id="urunmesaj" placeholder="Başka eklemek istedikleriniz..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                        </div>
+                        <h5 class="text-center text-muted">Sipariş Ver!</h5>
+
+
+                        <div class="product-pric text-center ">
+
+
+
+
+                        </div>
+
+
+
+
+                        @foreach (var item in Model.singleurun)
+                        {
+
+                            <div class="product-price text-center" id="sizeFiyatUpdate">
+
+              
+                                @Math.Round((decimal)item.urunFiyat, 2)
+                              
+
+                            </div>
+
+
+                            <div class="row">
+                               
+                              
+                              <i style="font-size:24px" class=" fa plus" id="minus">&#xf056;</i>
+                                    <input type="number" class="form-control  input-qty form-control-sm" min="1" maxlength="4" name="urunMik" value="1" id="urunMik" style="width:35px;height:20px;">
+                                    <i style="font-size:24px" class="fa plus" id="pls">&#xf055;</i>
+                                
+                                <div class="col-4">
+
+                                    <button class="btn btn-outline-secondary btn-sm  sepeteEkle" data-pID="@item.urunID" onchange="changeEvent(this)">
+                                        <span>Sepete Ekle</span>
+                                    </button>
+
+                                </div>
+                            </div>
+                                <div class="text-center mt-4">
+                                    <a href="@Url.Action("Index", "Home")" class="btn btn-link">Anasayfaya Dön</a>
+                                </div>}
+
+                            </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section -->
+<!--SEPETE EKLE-->
+<div id="panel-cart">
+    <div class="panel-cart-container">
+        <div class="panel-cart-title">
+            <h5 class="title">Sepetim</h5>
+            <button class="close" data-toggle="panel-cart"><i class="ti ti-close"></i></button>
+        </div>
+        <div class="panel-cart-content">
+            <table class="table-cart">
+
+
+
+                @if (ViewBag.carts != null)
+                {
+                    foreach (var item in ViewBag.carts as List<ibernsof_Restoran.Models.CartModel>)
+                    {
+                        <tr>
+                            <td class="title">
+                                <span class="name">
+                                    <a href="#productModal" data-toggle="modal"></a>@item.Urun.urunAd
+                                    @if (Session["values"] != null && Session["values"].ToString() != " " && Session["values"].ToString() != "")
+                                    {
+                                        @item.extraUrunAdi
+                                    }
+                                </span>
+                            </td>
+                            <td class="price">x @item.Quantity</td>
+                           
+                            <td class="price">(@Math.Round((decimal)item.NewPrice, 2)* @item.Quantity)</td>
+
+
+                            <td class="actions">
+
+                                <a href="#" class="action-icon deleteCarts" data-pID="@item.urunID"><i class="ti ti-close"></i></a>
+
+                            </td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr>
+                        <td class="price">Sepet Boş</td>
+                    </tr>
+                }
+
+
+
+            </table>
+            <div class="cart-summary">
+
+
+                <hr class="hr-sm">
+                <div class="row text-lg">
+                    <div class="col-7 text-right text-muted">Toplam:</div>
+                    <div class="col-5"><strong>@ViewBag.totalprice</strong></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    @if (ViewBag.carts != null)
+    {
+        <a href="@Url.Action("Index", "Cart")" class="panel-cart-action btn btn-dark btn-block btn-lg"><span>Ödemeye Git!</span></a>}
+</div>
+
+<!-- Body Overlay -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+@section script{
+    <script type="text/javascript">
+        $(function () {
+
+            $(".sizeChange").change(function () {
+                var sizeID = $("input[name='sizeID']:checked").val();
+
+                var urunID = location.search.split("urunID=")[1]
+                $.ajax({
+                    url: "/Kategori/productPrice",
+                    type: "POST",
+                    dataType: "json",
+                    data: { urunID: urunID, sizeID: sizeID },
+                    success: function (data) {
+                        //alert(data.toFixed(2));
+                        $("#sizeFiyatUpdate").html(data.toFixed(2));
+                    }
+                });
+
+
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+
+            $(".sizeChange").change(function () {
+                var sizeID = $("input[name='sizeID']:checked").val();
+
+                var urunID = location.search.split("urunID=")[1]
+                $.ajax({
+                    url: "/Kategori/productDetail",
+                    type: "POST",
+                    dataType: "json",
+                    data: { urunID: urunID, sizeID: sizeID },
+                    success: function (data) {
+
+                    }
+                });
+
+
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+
+        $(function () {
+
+            $(".sepeteEkle").on("click", function () {
+
+                var urunID = $(this).attr("data-pID");
+
+                var urunMiktar = $("#urunMik").val();
+                var sizeID = $("input[name='sizeID']:checked").val();
+                var urunmesaj = $("textarea").val();
+
+
+
+                var selectedValues = [];
+                var values;
+                $('#MyDiv input:checked').each(function () {
+                    selectedValues.push($(this).val());
+                });
+
+
+                values = selectedValues.join(",");
+
+
+                if (urunMiktar != null && urunMiktar >= 1 && urunMiktar != " ") {
+                    $.post("/Kategori/AddToCart?urunID=" + urunID + "&urunMiktar=" + urunMiktar + "&values=" + values + "&sizeID=" + sizeID + "&urunmesaj=" + urunmesaj, function (data) {
+                        swal("Başarılı!", "Urun Sepete Eklendi.", "success");
+                        setTimeout(function () { location.reload(); }, 1500)
+                        console.log(data);
+                    });
+                }
+                else {
+                    alert("Lütfen ürün miktarıni giriniz");
+                }
+                return false;
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $("#pls").on("click", function () {
+            var adet = $("#urunMik").val();//textimizdeki değeri alıyoruz
+            if (adet < 9999) {//kendim bir sınır belirledim
+                //siz kendiniz isteği doğrultusunda değiştirebilirsiniz
+                adet++;
+                $("#urunMik").val(adet);//Yeni değeri gönderiyoruz
+            }
+        });
+
+        $("#minus").on("click", function () {//yukarıdakiyle aynı işlem sadece azaltma yapıyoruz
+            var adet = $("#urunMik").val();
+            if (adet > 1) {//sıfırdan küçük olmasın bizim sınırımız
+                adet--;
+                $("#urunMik").val(adet);
+            }
+        });
+        $("#urunMik").keypress(function (e) {//textimize yazıldığı anda çalışmasını istiyoruz
+            var regex = new RegExp("^[0-9]"); //Burada sadece rakamsal değer girilmesini istiyoruz
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            //str değişkenimize girdiğmiz char gelmektedir
+            if (regex.test(str)) {//gelen stringimizi test ediyoruz.
+                return true;//rakamsalsa evet yaz
+            }
+            e.preventDefault();
+            return false;//değilse yazma
+        });
+
+    </script>
+
+}

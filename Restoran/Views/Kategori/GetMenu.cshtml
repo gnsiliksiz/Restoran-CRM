@@ -1,0 +1,10 @@
+﻿@model List<ibernsof_Restoran.Models.Kategori>
+
+
+@{
+    foreach (var item in Model)
+    {
+        <li class="item"><a class="list-group-item-heading" href="/Kategori/@item.kategoriAd.Replace(" ","-")/@item.kategoriID">@item.kategoriAd</a></li>
+
+        }
+    }

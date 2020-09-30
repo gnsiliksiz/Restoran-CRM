@@ -1,0 +1,119 @@
+﻿@model List<ibernsof_Restoran.Models.MusteriIstek>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<div class="breadcrumb-wrapper col-12">
+    <ol class="breadcrumb p-0 mb-0">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index","AdminHome")"><i class="bx bx-home-alt"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active">
+            Musteri TalepLeri
+        </li>
+    </ol>
+</div>
+<br />
+
+
+<div class="col-xl-3 col-md-4 col-3" align="right">
+    <div class="card invoice-action-wrapper shadow-none border">
+
+        <div class="invoice-action-btn">
+            <button class="btn btn-light-primary btn-block">
+                <a href="/AdminMusteriIstek/Create/">   <i class="bx bxs-categories"><span>Yeni Musteri Talep Ekle</span></i></a>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- table strip dark -->
+<div class="table-responsive">
+    <table class="table table-striped mb-0">
+        <thead>
+            <tr>
+
+                <th>Talep AD</th>
+                <th>Icon Resim</th>
+                <th>DÜZENLE/Sil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {@Html.Hidden("musteriIstekID")
+
+            <tr>
+
+
+                <td>@item.musteriIstekAdi</td>
+                <td>
+                    @if (item.iconSinifAdi != null)
+                    {
+                        <img src="@item.iconSinifAdi" alt="@item.musteriIstekID" class="rounded-circle" height="30" width="30" />
+                    }
+                </td>
+
+
+
+                <td>
+                    <button type="button" class="btn btn-light-danger btn-sm" data-toggle="modal" data-target="#DeleteMusConfirmation" onclick="DeleteMusteriIstekRecord(@item.musteriIstekID)"><i class="bx bx-trash-alt"></i></button>
+                    <button type="button" class="btn btn-light-info btn-sm" onclick="@("window.location.href='"+Url.Action("Edit","AdminMusteriIstek", new { musteriIstekID = item.musteriIstekID }) + "'");"><i class="bx bx-pencil"></i> </button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+<!-- DELETE MODAL -->
+<div class="modal fade" id="DeleteMusConfirmation" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Kategori Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Seçilen kategoriyi silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-danger" onclick="ConfirmMusDelete()">Onayla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    //Show The Popup Modal For DeleteComfirmation
+    var DeleteMusteriIstekRecord = function (musteriIstekID) {
+        $("#musteriIstekID").val(musteriIstekID);
+        $("#DeleteMusConfirmation").modal("show");
+    }
+    var ConfirmMusDelete = function () {
+        var musteriIstekID = $("#musteriIstekID").val();
+        $.ajax({
+            type: "POST",
+            url: "/AdminMusteriIstek/DeleteMusteriIstekRecord?musteriIstekID=" + musteriIstekID,
+            success: function (result) {
+                if (result == true) {
+                    alert("Silme islemi Basarili!..");
+                    window.location.href = "/AdminMusteriIstek/Index";
+                    $("#DeleteMusConfirmation").modal("hide");
+                    $("#modal .close").click();
+                } else {
+                    alert("Önce baglı olan taleplei Siliniz")
+                }
+            }
+
+        })
+    }
+</script>

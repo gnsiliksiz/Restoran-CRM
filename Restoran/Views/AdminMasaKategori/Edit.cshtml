@@ -1,0 +1,44 @@
+﻿@model ibernsof_Restoran.Models.masaKategori
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>masaKategori</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.masaKatID)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.masaKatAdi, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.masaKatAdi, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.masaKatAdi, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    <div class="col-xl-3 col-md-4 col-3" align="right">
+        <div class="card invoice-action-wrapper shadow-none border">
+
+            <div class="invoice-action-btn">
+                <button class="btn btn-light-primary btn-block">
+                    <i class="bx bxs-categories"><span> Ekle</span></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+

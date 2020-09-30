@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7b9677275f694975be71519edd9b5f0e" Name="Diagram1">
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.AltKategori" Width="1.5" PointX="3" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.Bildirim" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.CarouselOne" Width="1.5" PointX="9.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.CarouselTwo" Width="1.5" PointX="0.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.CartItem" Width="1.5" PointX="7.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.ExtraUrun" Width="1.5" PointX="7.5" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.Kategori" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.Masa" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.SizeProduct" Width="1.5" PointX="7.5" PointY="13.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.Teklif" Width="1.5" PointX="2.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.Urun" Width="1.5" PointX="5.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.User" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.Yetki" Width="1.5" PointX="0.75" PointY="2.875" IsExpanded="true" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_AltKategori_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_Urun_AltKategori" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_Bildirim_Masa" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_CartItems_Masa" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_CartItems_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_ExtraUrun_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_Masa_User" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_SizeProduct_Urun" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_Urun_User1" ManuallyRouted="false" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_User_Yetki" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.masaKategori" Width="1.5" PointX="11.625" PointY="5.625" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_Masa_masaKategori1" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.AdminAyar" Width="1.5" PointX="12.25" PointY="10.75" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.MusteriIstek" Width="1.5" PointX="10.125" PointY="18.875" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.MusteriTalep" Width="1.5" PointX="12.375" PointY="0.875" />
+        <EntityTypeShape EntityType="ibernsof_RestoranModel.WebAyar" Width="1.5" PointX="14.25" PointY="3.75" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_MusteriTalep_Masa" />
+        <AssociationConnector Association="ibernsof_RestoranModel.FK_MusteriTalep_MusteriIstek" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

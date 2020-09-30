@@ -1,0 +1,155 @@
+﻿@model IList<ibernsof_Restoran.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumb-wrapper col-12">
+    <ol class="breadcrumb p-0 mb-0">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index", "AdminHome")"><i class="bx bx-home-alt"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active">
+            Kullanıcılar
+        </li>
+    </ol>
+</div>
+<br />
+<div class="col-xl-3 col-md-4 col-12">
+    <div class="card invoice-action-wrapper shadow-none border">
+       
+            <div class="invoice-action-btn">
+                <button class="btn btn-light-primary btn-block" >
+                    <a href="/User/Create/">  <i class="bx bx-group"><span>Yeni Kullanici Ekle</span></i></a>
+                </button>
+            </div>
+    </div>
+</div>
+
+@Html.Hidden("userID")
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title"><b>Kullanıcı Listesi</b> </h3>
+    </div>
+    <!-- /.card-header -->
+
+
+
+
+    <div class="card-body">
+        <table id="example2" class="table zero-configuration">
+            <thead>
+                <tr>
+                    <th>Kullanıcı Adı</th>
+                    @{
+                        if (((int)Session["userYetkiID"]) == 1)
+                        {
+                            <th>Şifre</th>} }
+                            <th>Active</th>
+                            <th>Durum</th>
+                            <th>Yetki</th>
+                            <th>Duzenle/Sil</th>
+                        </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <span class="bullet bullet-info bullet-xs"></span>
+                        <small class="text-muted">@item.username</small>
+                    </td>
+                    @{
+                        if (((int)Session["userYetkiID"]) == 1)
+                        {
+                            <td>
+                                <span class="bullet bullet-danger bullet-xs"></span>
+                                <small class="text-muted">@item.password</small>
+                            </td>}
+                        }
+
+                        <td>
+                            @if (item.active == true)
+                            {
+                                <span class="badge badge-light-success badge-pill">Silinmedi</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light-danger badge-pill">Silindi</span>
+                            }
+                        </td>
+                        <td>
+                            @if (item.userDurum == true)
+                            {
+                                <span class="badge badge-light-success badge-pill">Aktif</span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light-danger badge-pill">Pasif</span>
+                            }
+                        </td>
+                        <td>
+                            <span class="bullet bullet-warning bullet-xs"></span>
+                            <small class="text-muted">@item.Yetki.yetkiAd</small>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light-info btn-xs" style="width:5%;" onclick="@("window.location.href='"+Url.Action("Edit","User", new { userID = item.userID }) + "'");"><i class="bx bx-edit mt-0"></i> </button>
+                            <button type="button" class="btn btn-light-danger btn-xs" style="width:5%;" data-toggle="modal" data-target="#DeleteConfirmation" onclick="DeleteUserRecord(@item.userID)"><i class="bx bx-trash">&nbsp </i></button>
+
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+
+<!-- DELETE MODAL -->
+<div class="modal fade" id="DeleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Kullanıcı Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Seçilen Kullanıcıyı silmek istediğinize emin misiniz ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Iptal</button>
+                <button type="button" class="btn btn-danger" onclick="ConfirmDelete()">Onayla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+    //Show The Popup Modal For DeleteComfirmation
+    var DeleteUserRecord = function (userID) {
+        $("#userID").val(userID);
+        $("#DeleteConfirmation").modal("show");
+    }
+    var ConfirmDelete = function () {
+        var userID = $("#userID").val();
+        $.ajax({
+            type: "POST",
+            url: "/User/DeleteUserRecord?userID=" + userID,
+            success: function (result) {
+                alert("Silme islemi Basarili!..");
+                window.location.href = "/User/Index";
+                $("#DeleteConfirmation").modal("hide");
+                $("#modal .close").click();
+            }
+        })
+    }
+</script>

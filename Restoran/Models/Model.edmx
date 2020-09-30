@@ -1,0 +1,1209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ibernsof_RestoranModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminAyar">
+          <Key>
+            <PropertyRef Name="adminAyarID" />
+          </Key>
+          <Property Name="adminAyarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="adminTitle1" Type="int" />
+          <Property Name="adminLogo" Type="nvarchar(max)" />
+          <Property Name="adminFooter1" Type="nvarchar" MaxLength="50" />
+          <Property Name="adminFooter2" Type="nvarchar" MaxLength="50" />
+          <Property Name="adminLogo2" Type="nvarchar" MaxLength="50" />
+          <Property Name="adminFacebook" Type="nvarchar" MaxLength="50" />
+          <Property Name="adminInstagram" Type="nvarchar" MaxLength="50" />
+          <Property Name="adminLinkedIn" Type="nvarchar" MaxLength="50" />
+          <Property Name="adminYoutube" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AltKategori">
+          <Key>
+            <PropertyRef Name="altKatID" />
+          </Key>
+          <Property Name="altKatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="altKatAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="isDeleted" Type="bit" />
+          <Property Name="altKatResim" Type="nvarchar(max)" />
+          <Property Name="altKatDurum" Type="bit" />
+          <Property Name="kategoriID" Type="int" />
+          <Property Name="altKatsira" Type="int" />
+        </EntityType>
+        <EntityType Name="Bildirim">
+          <Key>
+            <PropertyRef Name="bildirimID" />
+          </Key>
+          <Property Name="bildirimID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bildirimTur" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="bildirimDurum" Type="bit" />
+          <Property Name="masaID" Type="int" />
+          <Property Name="bildirimDate" Type="datetime" Nullable="false" />
+          <Property Name="isChecked" Type="bit" />
+        </EntityType>
+        <EntityType Name="CarouselOne">
+          <Key>
+            <PropertyRef Name="reklamID" />
+          </Key>
+          <Property Name="reklamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reklamHeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="reklamResim" Type="nvarchar(max)" />
+          <Property Name="reklamAciklamaHeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="reklamAciklama" Type="nvarchar" MaxLength="50" />
+          <Property Name="reklamSira" Type="nvarchar" MaxLength="50" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="CarouselTwo">
+          <Key>
+            <PropertyRef Name="reklamtwoID" />
+          </Key>
+          <Property Name="reklamtwoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reklamtwoHeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="reklamtwoResim" Type="nvarchar(max)" />
+          <Property Name="reklamtwoAciklamaHeader" Type="nvarchar" MaxLength="50" />
+          <Property Name="reklamtwoAciklama" Type="nvarchar" MaxLength="50" />
+          <Property Name="reklamtwoSira" Type="nvarchar" MaxLength="50" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="CartItems">
+          <Key>
+            <PropertyRef Name="cartItemID" />
+          </Key>
+          <Property Name="cartItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urunID" Type="int" />
+          <Property Name="miktar" Type="int" />
+          <Property Name="fiyat" Type="money" />
+          <Property Name="zaman" Type="datetime" />
+          <Property Name="masaID" Type="int" />
+          <Property Name="odemeTur" Type="nvarchar" MaxLength="50" />
+          <Property Name="cartNo" Type="int" />
+          <Property Name="active" Type="bit" />
+          <Property Name="onay" Type="bit" />
+          <Property Name="siparisonay" Type="bit" />
+          <Property Name="urunSizeID" Type="int" />
+          <Property Name="urunMesaj" Type="nvarchar(max)" />
+          <Property Name="extraUrunID" Type="int" />
+          <Property Name="extraUrunAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="urunYeniFiyat" Type="money" />
+        </EntityType>
+        <EntityType Name="ExtraUrun">
+          <Key>
+            <PropertyRef Name="extraUrunID" />
+          </Key>
+          <Property Name="extraUrunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="extraUrunAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="extraUrunFiyat" Type="money" />
+          <Property Name="urunID" Type="int" />
+          <Property Name="active" Type="bit" />
+          <Property Name="isSelected" Type="bit" />
+          <Property Name="extraUrunAdet" Type="int" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriID" />
+          </Key>
+          <Property Name="kategoriID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kategoriAd" Type="nvarchar" MaxLength="50" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Masa">
+          <Key>
+            <PropertyRef Name="masaID" />
+          </Key>
+          <Property Name="masaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="masaNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="masaKat" Type="int" />
+          <Property Name="qrHash" Type="nchar" MaxLength="16" />
+          <Property Name="qrUrl" Type="nvarchar(max)" />
+          <Property Name="qrFoto" Type="nvarchar(max)" />
+          <Property Name="userID" Type="int" />
+          <Property Name="masaKatID" Type="int" />
+        </EntityType>
+        <EntityType Name="masaKategori">
+          <Key>
+            <PropertyRef Name="masaKatID" />
+          </Key>
+          <Property Name="masaKatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="masaKatAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="isactive" Type="bit" />
+        </EntityType>
+        <EntityType Name="MusteriIstek">
+          <Key>
+            <PropertyRef Name="musteriIstekID" />
+          </Key>
+          <Property Name="musteriIstekID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="musteriIstekAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="iconSinifAdi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MusteriTalep">
+          <Key>
+            <PropertyRef Name="talepID" />
+          </Key>
+          <Property Name="talepID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="musteriIstekID" Type="int" />
+          <Property Name="masaID" Type="int" />
+        </EntityType>
+        <EntityType Name="SizeProduct">
+          <Key>
+            <PropertyRef Name="sizeID" />
+          </Key>
+          <Property Name="sizeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sizeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="sizeFiyat" Type="money" />
+          <Property Name="urunID" Type="int" />
+          <Property Name="active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Teklif">
+          <Key>
+            <PropertyRef Name="teklifID" />
+          </Key>
+          <Property Name="teklifID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="teklifAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="teklifResim" Type="nvarchar(max)" />
+          <Property Name="teklifFiyat" Type="money" />
+          <Property Name="teklifAciklama" Type="nvarchar" MaxLength="50" />
+          <Property Name="teklifMiktar" Type="int" />
+          <Property Name="teklifStok" Type="int" />
+          <Property Name="teklifZaman" Type="datetime" />
+          <Property Name="teklifGecerliGunSayisi" Type="int" />
+          <Property Name="active" Type="bit" />
+          <Property Name="teklifHangiGun" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="urunID" />
+          </Key>
+          <Property Name="urunID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urunAd" Type="nvarchar(max)" />
+          <Property Name="urunFiyat" Type="money" />
+          <Property Name="urunResim" Type="nvarchar(max)" />
+          <Property Name="altKatID" Type="int" />
+          <Property Name="isDeleted" Type="bit" />
+          <Property Name="userID" Type="int" />
+          <Property Name="urunAciklama" Type="nvarchar(max)" />
+          <Property Name="urunMiktar" Type="int" />
+          <Property Name="urunStok" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="active" Type="bit" />
+          <Property Name="yetkiID" Type="int" />
+          <Property Name="userZaman" Type="datetime" />
+          <Property Name="userDurum" Type="bit" />
+        </EntityType>
+        <EntityType Name="WebAyar">
+          <Key>
+            <PropertyRef Name="webAyarID" />
+          </Key>
+          <Property Name="webAyarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="logo" Type="nvarchar(max)" />
+          <Property Name="footerTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="ayarFacebook" Type="nvarchar" MaxLength="50" />
+          <Property Name="ayarInstagram" Type="nvarchar" MaxLength="50" />
+          <Property Name="ayarLinkedIn" Type="nvarchar" MaxLength="50" />
+          <Property Name="ayarGoogle" Type="nvarchar" MaxLength="50" />
+          <Property Name="ayarYoutube" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Yetki">
+          <Key>
+            <PropertyRef Name="yetkiID" />
+          </Key>
+          <Property Name="yetkiID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yetkiAd" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AltKategori_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AltKategori" Type="Self.AltKategori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriID" />
+            </Principal>
+            <Dependent Role="AltKategori">
+              <PropertyRef Name="kategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bildirim_Masa">
+          <End Role="Masa" Type="Self.Masa" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Bildirim" Type="Self.Bildirim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masa">
+              <PropertyRef Name="masaID" />
+            </Principal>
+            <Dependent Role="Bildirim">
+              <PropertyRef Name="masaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartItems_Masa">
+          <End Role="Masa" Type="Self.Masa" Multiplicity="0..1" />
+          <End Role="CartItems" Type="Self.CartItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masa">
+              <PropertyRef Name="masaID" />
+            </Principal>
+            <Dependent Role="CartItems">
+              <PropertyRef Name="masaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartItems_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="CartItems" Type="Self.CartItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="urunID" />
+            </Principal>
+            <Dependent Role="CartItems">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtraUrun_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="ExtraUrun" Type="Self.ExtraUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="urunID" />
+            </Principal>
+            <Dependent Role="ExtraUrun">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masa_masaKategori">
+          <End Role="masaKategori" Type="Self.masaKategori" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masa" Type="Self.Masa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="masaKategori">
+              <PropertyRef Name="masaKatID" />
+            </Principal>
+            <Dependent Role="Masa">
+              <PropertyRef Name="masaKatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masa_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masa" Type="Self.Masa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Masa">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MusteriTalep_Masa">
+          <End Role="Masa" Type="Self.Masa" Multiplicity="0..1" />
+          <End Role="MusteriTalep" Type="Self.MusteriTalep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masa">
+              <PropertyRef Name="masaID" />
+            </Principal>
+            <Dependent Role="MusteriTalep">
+              <PropertyRef Name="masaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MusteriTalep_MusteriIstek">
+          <End Role="MusteriIstek" Type="Self.MusteriIstek" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MusteriTalep" Type="Self.MusteriTalep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusteriIstek">
+              <PropertyRef Name="musteriIstekID" />
+            </Principal>
+            <Dependent Role="MusteriTalep">
+              <PropertyRef Name="musteriIstekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SizeProduct_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SizeProduct" Type="Self.SizeProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="urunID" />
+            </Principal>
+            <Dependent Role="SizeProduct">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_AltKategori">
+          <End Role="AltKategori" Type="Self.AltKategori" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AltKategori">
+              <PropertyRef Name="altKatID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="altKatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Yetki">
+          <End Role="Yetki" Type="Self.Yetki" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yetki">
+              <PropertyRef Name="yetkiID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="yetkiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ibernsof_RestoranModelStoreContainer">
+          <EntitySet Name="AdminAyar" EntityType="Self.AdminAyar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AltKategori" EntityType="Self.AltKategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bildirim" EntityType="Self.Bildirim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarouselOne" EntityType="Self.CarouselOne" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CarouselTwo" EntityType="Self.CarouselTwo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartItems" EntityType="Self.CartItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExtraUrun" EntityType="Self.ExtraUrun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Masa" EntityType="Self.Masa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="masaKategori" EntityType="Self.masaKategori" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MusteriIstek" EntityType="Self.MusteriIstek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MusteriTalep" EntityType="Self.MusteriTalep" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SizeProduct" EntityType="Self.SizeProduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teklif" EntityType="Self.Teklif" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebAyar" EntityType="Self.WebAyar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yetki" EntityType="Self.Yetki" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AltKategori_Kategori" Association="Self.FK_AltKategori_Kategori">
+            <End Role="Kategori" EntitySet="Kategori" />
+            <End Role="AltKategori" EntitySet="AltKategori" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bildirim_Masa" Association="Self.FK_Bildirim_Masa">
+            <End Role="Masa" EntitySet="Masa" />
+            <End Role="Bildirim" EntitySet="Bildirim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartItems_Masa" Association="Self.FK_CartItems_Masa">
+            <End Role="Masa" EntitySet="Masa" />
+            <End Role="CartItems" EntitySet="CartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartItems_Urun" Association="Self.FK_CartItems_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="CartItems" EntitySet="CartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtraUrun_Urun" Association="Self.FK_ExtraUrun_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="ExtraUrun" EntitySet="ExtraUrun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masa_masaKategori" Association="Self.FK_Masa_masaKategori">
+            <End Role="masaKategori" EntitySet="masaKategori" />
+            <End Role="Masa" EntitySet="Masa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masa_User" Association="Self.FK_Masa_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Masa" EntitySet="Masa" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MusteriTalep_Masa" Association="Self.FK_MusteriTalep_Masa">
+            <End Role="Masa" EntitySet="Masa" />
+            <End Role="MusteriTalep" EntitySet="MusteriTalep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MusteriTalep_MusteriIstek" Association="Self.FK_MusteriTalep_MusteriIstek">
+            <End Role="MusteriIstek" EntitySet="MusteriIstek" />
+            <End Role="MusteriTalep" EntitySet="MusteriTalep" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SizeProduct_Urun" Association="Self.FK_SizeProduct_Urun">
+            <End Role="Urun" EntitySet="Urun" />
+            <End Role="SizeProduct" EntitySet="SizeProduct" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_AltKategori" Association="Self.FK_Urun_AltKategori">
+            <End Role="AltKategori" EntitySet="AltKategori" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_User1" Association="Self.FK_Urun_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Urun" EntitySet="Urun" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Yetki" Association="Self.FK_User_Yetki">
+            <End Role="Yetki" EntitySet="Yetki" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ibernsof_RestoranModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AltKategori">
+          <Key>
+            <PropertyRef Name="altKatID" />
+          </Key>
+          <Property Name="altKatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="altKatAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="altKatResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="altKatDurum" Type="Boolean" />
+          <Property Name="kategoriID" Type="Int32" />
+          <Property Name="altKatsira" Type="Int32" />
+          <NavigationProperty Name="Kategori" Relationship="Self.FK_AltKategori_Kategori" FromRole="AltKategori" ToRole="Kategori" />
+          <NavigationProperty Name="Uruns" Relationship="Self.FK_Urun_AltKategori" FromRole="AltKategori" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Bildirim">
+          <Key>
+            <PropertyRef Name="bildirimID" />
+          </Key>
+          <Property Name="bildirimID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bildirimTur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="bildirimDurum" Type="Boolean" />
+          <Property Name="masaID" Type="Int32" />
+          <Property Name="bildirimDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isChecked" Type="Boolean" />
+          <NavigationProperty Name="Masa" Relationship="Self.FK_Bildirim_Masa" FromRole="Bildirim" ToRole="Masa" />
+        </EntityType>
+        <EntityType Name="CarouselOne">
+          <Key>
+            <PropertyRef Name="reklamID" />
+          </Key>
+          <Property Name="reklamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reklamHeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reklamResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="reklamAciklamaHeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reklamAciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reklamSira" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CarouselTwo">
+          <Key>
+            <PropertyRef Name="reklamtwoID" />
+          </Key>
+          <Property Name="reklamtwoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reklamtwoHeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reklamtwoResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="reklamtwoAciklamaHeader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reklamtwoAciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="reklamtwoSira" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="CartItem">
+          <Key>
+            <PropertyRef Name="cartItemID" />
+          </Key>
+          <Property Name="cartItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urunID" Type="Int32" />
+          <Property Name="miktar" Type="Int32" />
+          <Property Name="fiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="zaman" Type="DateTime" Precision="3" />
+          <Property Name="masaID" Type="Int32" />
+          <Property Name="odemeTur" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="cartNo" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="onay" Type="Boolean" />
+          <Property Name="siparisonay" Type="Boolean" />
+          <Property Name="urunSizeID" Type="Int32" />
+          <Property Name="urunMesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="extraUrunID" Type="Int32" />
+          <Property Name="extraUrunAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="urunYeniFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Masa" Relationship="Self.FK_CartItems_Masa" FromRole="CartItems" ToRole="Masa" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_CartItems_Urun" FromRole="CartItems" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="ExtraUrun">
+          <Key>
+            <PropertyRef Name="extraUrunID" />
+          </Key>
+          <Property Name="extraUrunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="extraUrunAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="extraUrunFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="urunID" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="isSelected" Type="Boolean" />
+          <Property Name="extraUrunAdet" Type="Int32" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_ExtraUrun_Urun" FromRole="ExtraUrun" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Kategori">
+          <Key>
+            <PropertyRef Name="kategoriID" />
+          </Key>
+          <Property Name="kategoriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <NavigationProperty Name="AltKategoris" Relationship="Self.FK_AltKategori_Kategori" FromRole="Kategori" ToRole="AltKategori" />
+        </EntityType>
+        <EntityType Name="Masa">
+          <Key>
+            <PropertyRef Name="masaID" />
+          </Key>
+          <Property Name="masaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="masaNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="masaKat" Type="Int32" />
+          <Property Name="qrHash" Type="String" MaxLength="16" FixedLength="true" Unicode="true" />
+          <Property Name="qrUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="qrFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="userID" Type="Int32" />
+          <NavigationProperty Name="Bildirims" Relationship="Self.FK_Bildirim_Masa" FromRole="Masa" ToRole="Bildirim" />
+          <NavigationProperty Name="CartItems" Relationship="Self.FK_CartItems_Masa" FromRole="Masa" ToRole="CartItems" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Masa_User" FromRole="Masa" ToRole="User" />
+          <Property Name="masaKatID" Type="Int32" />
+          <NavigationProperty Name="masaKategori" Relationship="ibernsof_RestoranModel.FK_Masa_masaKategori1" FromRole="Masa" ToRole="masaKategori" />
+          <NavigationProperty Name="MusteriTaleps" Relationship="ibernsof_RestoranModel.FK_MusteriTalep_Masa" FromRole="Masa" ToRole="MusteriTalep" />
+        </EntityType>
+        <EntityType Name="SizeProduct">
+          <Key>
+            <PropertyRef Name="sizeID" />
+          </Key>
+          <Property Name="sizeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sizeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="sizeFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="urunID" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <NavigationProperty Name="Urun" Relationship="Self.FK_SizeProduct_Urun" FromRole="SizeProduct" ToRole="Urun" />
+        </EntityType>
+        <EntityType Name="Teklif">
+          <Key>
+            <PropertyRef Name="teklifID" />
+          </Key>
+          <Property Name="teklifID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="teklifAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="teklifResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="teklifFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="teklifAciklama" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="teklifMiktar" Type="Int32" />
+          <Property Name="teklifStok" Type="Int32" />
+          <Property Name="teklifZaman" Type="DateTime" Precision="3" />
+          <Property Name="teklifGecerliGunSayisi" Type="Int32" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="teklifHangiGun" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Urun">
+          <Key>
+            <PropertyRef Name="urunID" />
+          </Key>
+          <Property Name="urunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urunAd" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="urunFiyat" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="urunResim" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="altKatID" Type="Int32" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="urunAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="urunMiktar" Type="Int32" />
+          <Property Name="urunStok" Type="Int32" />
+          <NavigationProperty Name="AltKategori" Relationship="Self.FK_Urun_AltKategori" FromRole="Urun" ToRole="AltKategori" />
+          <NavigationProperty Name="CartItems" Relationship="Self.FK_CartItems_Urun" FromRole="Urun" ToRole="CartItems" />
+          <NavigationProperty Name="ExtraUruns" Relationship="Self.FK_ExtraUrun_Urun" FromRole="Urun" ToRole="ExtraUrun" />
+          <NavigationProperty Name="SizeProducts" Relationship="Self.FK_SizeProduct_Urun" FromRole="Urun" ToRole="SizeProduct" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Urun_User1" FromRole="Urun" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="active" Type="Boolean" />
+          <Property Name="yetkiID" Type="Int32" />
+          <Property Name="userZaman" Type="DateTime" Precision="3" />
+          <Property Name="userDurum" Type="Boolean" />
+          <NavigationProperty Name="Masas" Relationship="Self.FK_Masa_User" FromRole="User" ToRole="Masa" />
+          <NavigationProperty Name="Uruns" Relationship="Self.FK_Urun_User1" FromRole="User" ToRole="Urun" />
+          <NavigationProperty Name="Yetki" Relationship="Self.FK_User_Yetki" FromRole="User" ToRole="Yetki" />
+        </EntityType>
+        <EntityType Name="Yetki">
+          <Key>
+            <PropertyRef Name="yetkiID" />
+          </Key>
+          <Property Name="yetkiID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yetkiAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Yetki" FromRole="Yetki" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AltKategori_Kategori">
+          <End Role="Kategori" Type="Self.Kategori" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AltKategori" Type="Self.AltKategori" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategori">
+              <PropertyRef Name="kategoriID" />
+            </Principal>
+            <Dependent Role="AltKategori">
+              <PropertyRef Name="kategoriID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_AltKategori">
+          <End Role="AltKategori" Type="Self.AltKategori" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AltKategori">
+              <PropertyRef Name="altKatID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="altKatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bildirim_Masa">
+          <End Role="Masa" Type="Self.Masa" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Bildirim" Type="Self.Bildirim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masa">
+              <PropertyRef Name="masaID" />
+            </Principal>
+            <Dependent Role="Bildirim">
+              <PropertyRef Name="masaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartItems_Masa">
+          <End Role="Masa" Type="Self.Masa" Multiplicity="0..1" />
+          <End Role="CartItems" Type="Self.CartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masa">
+              <PropertyRef Name="masaID" />
+            </Principal>
+            <Dependent Role="CartItems">
+              <PropertyRef Name="masaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartItems_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="CartItems" Type="Self.CartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="urunID" />
+            </Principal>
+            <Dependent Role="CartItems">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExtraUrun_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+          <End Role="ExtraUrun" Type="Self.ExtraUrun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="urunID" />
+            </Principal>
+            <Dependent Role="ExtraUrun">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Masa_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Masa" Type="Self.Masa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Masa">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SizeProduct_Urun">
+          <End Role="Urun" Type="Self.Urun" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SizeProduct" Type="Self.SizeProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Urun">
+              <PropertyRef Name="urunID" />
+            </Principal>
+            <Dependent Role="SizeProduct">
+              <PropertyRef Name="urunID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Urun_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Urun">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Yetki">
+          <End Role="Yetki" Type="Self.Yetki" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yetki">
+              <PropertyRef Name="yetkiID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="yetkiID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ibernsof_RestoranEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AltKategoris" EntityType="Self.AltKategori" />
+          <EntitySet Name="Bildirims" EntityType="Self.Bildirim" />
+          <EntitySet Name="CarouselOnes" EntityType="Self.CarouselOne" />
+          <EntitySet Name="CarouselTwoes" EntityType="Self.CarouselTwo" />
+          <EntitySet Name="CartItems" EntityType="Self.CartItem" />
+          <EntitySet Name="ExtraUruns" EntityType="Self.ExtraUrun" />
+          <EntitySet Name="Kategoris" EntityType="Self.Kategori" />
+          <EntitySet Name="Masas" EntityType="Self.Masa" />
+          <EntitySet Name="SizeProducts" EntityType="Self.SizeProduct" />
+          <EntitySet Name="Teklifs" EntityType="Self.Teklif" />
+          <EntitySet Name="Uruns" EntityType="Self.Urun" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Yetkis" EntityType="Self.Yetki" />
+          <AssociationSet Name="FK_AltKategori_Kategori" Association="Self.FK_AltKategori_Kategori">
+            <End Role="Kategori" EntitySet="Kategoris" />
+            <End Role="AltKategori" EntitySet="AltKategoris" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_AltKategori" Association="Self.FK_Urun_AltKategori">
+            <End Role="AltKategori" EntitySet="AltKategoris" />
+            <End Role="Urun" EntitySet="Uruns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bildirim_Masa" Association="Self.FK_Bildirim_Masa">
+            <End Role="Masa" EntitySet="Masas" />
+            <End Role="Bildirim" EntitySet="Bildirims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartItems_Masa" Association="Self.FK_CartItems_Masa">
+            <End Role="Masa" EntitySet="Masas" />
+            <End Role="CartItems" EntitySet="CartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartItems_Urun" Association="Self.FK_CartItems_Urun">
+            <End Role="Urun" EntitySet="Uruns" />
+            <End Role="CartItems" EntitySet="CartItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExtraUrun_Urun" Association="Self.FK_ExtraUrun_Urun">
+            <End Role="Urun" EntitySet="Uruns" />
+            <End Role="ExtraUrun" EntitySet="ExtraUruns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Masa_User" Association="Self.FK_Masa_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Masa" EntitySet="Masas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SizeProduct_Urun" Association="Self.FK_SizeProduct_Urun">
+            <End Role="Urun" EntitySet="Uruns" />
+            <End Role="SizeProduct" EntitySet="SizeProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Urun_User1" Association="Self.FK_Urun_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Urun" EntitySet="Uruns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Yetki" Association="Self.FK_User_Yetki">
+            <End Role="Yetki" EntitySet="Yetkis" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="masaKategoris" EntityType="ibernsof_RestoranModel.masaKategori" />
+          <AssociationSet Name="FK_Masa_masaKategori1" Association="ibernsof_RestoranModel.FK_Masa_masaKategori1">
+            <End Role="masaKategori" EntitySet="masaKategoris" />
+            <End Role="Masa" EntitySet="Masas" />
+          </AssociationSet>
+          <EntitySet Name="AdminAyars" EntityType="ibernsof_RestoranModel.AdminAyar" />
+          <EntitySet Name="MusteriIsteks" EntityType="ibernsof_RestoranModel.MusteriIstek" />
+          <EntitySet Name="MusteriTaleps" EntityType="ibernsof_RestoranModel.MusteriTalep" />
+          <EntitySet Name="WebAyars" EntityType="ibernsof_RestoranModel.WebAyar" />
+          <AssociationSet Name="FK_MusteriTalep_Masa" Association="ibernsof_RestoranModel.FK_MusteriTalep_Masa">
+            <End Role="Masa" EntitySet="Masas" />
+            <End Role="MusteriTalep" EntitySet="MusteriTaleps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MusteriTalep_MusteriIstek" Association="ibernsof_RestoranModel.FK_MusteriTalep_MusteriIstek">
+            <End Role="MusteriIstek" EntitySet="MusteriIsteks" />
+            <End Role="MusteriTalep" EntitySet="MusteriTaleps" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="masaKategori">
+          <Key>
+            <PropertyRef Name="masaKatID" />
+          </Key>
+          <Property Name="masaKatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="masaKatAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isactive" Type="Boolean" />
+          <NavigationProperty Name="Masas" Relationship="ibernsof_RestoranModel.FK_Masa_masaKategori1" FromRole="masaKategori" ToRole="Masa" />
+        </EntityType>
+        <Association Name="FK_Masa_masaKategori1">
+          <End Type="ibernsof_RestoranModel.masaKategori" Role="masaKategori" Multiplicity="0..1" />
+          <End Type="ibernsof_RestoranModel.Masa" Role="Masa" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="masaKategori">
+              <PropertyRef Name="masaKatID" />
+            </Principal>
+            <Dependent Role="Masa">
+              <PropertyRef Name="masaKatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AdminAyar">
+          <Key>
+            <PropertyRef Name="adminAyarID" />
+          </Key>
+          <Property Name="adminAyarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="adminTitle1" Type="Int32" />
+          <Property Name="adminLogo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="adminFooter1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adminFooter2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adminLogo2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adminFacebook" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adminInstagram" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adminLinkedIn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adminYoutube" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MusteriIstek">
+          <Key>
+            <PropertyRef Name="musteriIstekID" />
+          </Key>
+          <Property Name="musteriIstekID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="musteriIstekAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="iconSinifAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="MusteriTaleps" Relationship="ibernsof_RestoranModel.FK_MusteriTalep_MusteriIstek" FromRole="MusteriIstek" ToRole="MusteriTalep" />
+        </EntityType>
+        <EntityType Name="MusteriTalep">
+          <Key>
+            <PropertyRef Name="talepID" />
+          </Key>
+          <Property Name="talepID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="musteriIstekID" Type="Int32" />
+          <Property Name="masaID" Type="Int32" />
+          <NavigationProperty Name="Masa" Relationship="ibernsof_RestoranModel.FK_MusteriTalep_Masa" FromRole="MusteriTalep" ToRole="Masa" />
+          <NavigationProperty Name="MusteriIstek" Relationship="ibernsof_RestoranModel.FK_MusteriTalep_MusteriIstek" FromRole="MusteriTalep" ToRole="MusteriIstek" />
+        </EntityType>
+        <EntityType Name="WebAyar">
+          <Key>
+            <PropertyRef Name="webAyarID" />
+          </Key>
+          <Property Name="webAyarID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="footerTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ayarFacebook" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ayarInstagram" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ayarLinkedIn" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ayarGoogle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ayarYoutube" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_MusteriTalep_Masa">
+          <End Type="ibernsof_RestoranModel.Masa" Role="Masa" Multiplicity="0..1" />
+          <End Type="ibernsof_RestoranModel.MusteriTalep" Role="MusteriTalep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Masa">
+              <PropertyRef Name="masaID" />
+            </Principal>
+            <Dependent Role="MusteriTalep">
+              <PropertyRef Name="masaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MusteriTalep_MusteriIstek">
+          <End Type="ibernsof_RestoranModel.MusteriIstek" Role="MusteriIstek" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="ibernsof_RestoranModel.MusteriTalep" Role="MusteriTalep" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusteriIstek">
+              <PropertyRef Name="musteriIstekID" />
+            </Principal>
+            <Dependent Role="MusteriTalep">
+              <PropertyRef Name="musteriIstekID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ibernsof_RestoranModelStoreContainer" CdmEntityContainer="ibernsof_RestoranEntities">
+          <EntitySetMapping Name="AltKategoris">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.AltKategori">
+              <MappingFragment StoreEntitySet="AltKategori">
+                <ScalarProperty Name="altKatID" ColumnName="altKatID" />
+                <ScalarProperty Name="altKatAdi" ColumnName="altKatAdi" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="altKatResim" ColumnName="altKatResim" />
+                <ScalarProperty Name="altKatDurum" ColumnName="altKatDurum" />
+                <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+                <ScalarProperty Name="altKatsira" ColumnName="altKatsira" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bildirims">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.Bildirim">
+              <MappingFragment StoreEntitySet="Bildirim">
+                <ScalarProperty Name="bildirimID" ColumnName="bildirimID" />
+                <ScalarProperty Name="bildirimTur" ColumnName="bildirimTur" />
+                <ScalarProperty Name="bildirimDurum" ColumnName="bildirimDurum" />
+                <ScalarProperty Name="masaID" ColumnName="masaID" />
+                <ScalarProperty Name="bildirimDate" ColumnName="bildirimDate" />
+                <ScalarProperty Name="isChecked" ColumnName="isChecked" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarouselOnes">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.CarouselOne">
+              <MappingFragment StoreEntitySet="CarouselOne">
+                <ScalarProperty Name="reklamID" ColumnName="reklamID" />
+                <ScalarProperty Name="reklamHeader" ColumnName="reklamHeader" />
+                <ScalarProperty Name="reklamResim" ColumnName="reklamResim" />
+                <ScalarProperty Name="reklamAciklamaHeader" ColumnName="reklamAciklamaHeader" />
+                <ScalarProperty Name="reklamAciklama" ColumnName="reklamAciklama" />
+                <ScalarProperty Name="reklamSira" ColumnName="reklamSira" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CarouselTwoes">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.CarouselTwo">
+              <MappingFragment StoreEntitySet="CarouselTwo">
+                <ScalarProperty Name="reklamtwoID" ColumnName="reklamtwoID" />
+                <ScalarProperty Name="reklamtwoHeader" ColumnName="reklamtwoHeader" />
+                <ScalarProperty Name="reklamtwoResim" ColumnName="reklamtwoResim" />
+                <ScalarProperty Name="reklamtwoAciklamaHeader" ColumnName="reklamtwoAciklamaHeader" />
+                <ScalarProperty Name="reklamtwoAciklama" ColumnName="reklamtwoAciklama" />
+                <ScalarProperty Name="reklamtwoSira" ColumnName="reklamtwoSira" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartItems">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.CartItem">
+              <MappingFragment StoreEntitySet="CartItems">
+                <ScalarProperty Name="cartItemID" ColumnName="cartItemID" />
+                <ScalarProperty Name="urunID" ColumnName="urunID" />
+                <ScalarProperty Name="miktar" ColumnName="miktar" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="zaman" ColumnName="zaman" />
+                <ScalarProperty Name="masaID" ColumnName="masaID" />
+                <ScalarProperty Name="odemeTur" ColumnName="odemeTur" />
+                <ScalarProperty Name="cartNo" ColumnName="cartNo" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="onay" ColumnName="onay" />
+                <ScalarProperty Name="siparisonay" ColumnName="siparisonay" />
+                <ScalarProperty Name="urunSizeID" ColumnName="urunSizeID" />
+                <ScalarProperty Name="urunMesaj" ColumnName="urunMesaj" />
+                <ScalarProperty Name="extraUrunID" ColumnName="extraUrunID" />
+                <ScalarProperty Name="extraUrunAdi" ColumnName="extraUrunAdi" />
+                <ScalarProperty Name="urunYeniFiyat" ColumnName="urunYeniFiyat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExtraUruns">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.ExtraUrun">
+              <MappingFragment StoreEntitySet="ExtraUrun">
+                <ScalarProperty Name="extraUrunID" ColumnName="extraUrunID" />
+                <ScalarProperty Name="extraUrunAdi" ColumnName="extraUrunAdi" />
+                <ScalarProperty Name="extraUrunFiyat" ColumnName="extraUrunFiyat" />
+                <ScalarProperty Name="urunID" ColumnName="urunID" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="isSelected" ColumnName="isSelected" />
+                <ScalarProperty Name="extraUrunAdet" ColumnName="extraUrunAdet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kategoris">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.Kategori">
+              <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+                <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Masas">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.Masa">
+              <MappingFragment StoreEntitySet="Masa">
+                <ScalarProperty Name="masaKatID" ColumnName="masaKatID" />
+                <ScalarProperty Name="masaID" ColumnName="masaID" />
+                <ScalarProperty Name="masaNo" ColumnName="masaNo" />
+                <ScalarProperty Name="masaKat" ColumnName="masaKat" />
+                <ScalarProperty Name="qrHash" ColumnName="qrHash" />
+                <ScalarProperty Name="qrUrl" ColumnName="qrUrl" />
+                <ScalarProperty Name="qrFoto" ColumnName="qrFoto" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SizeProducts">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.SizeProduct">
+              <MappingFragment StoreEntitySet="SizeProduct">
+                <ScalarProperty Name="sizeID" ColumnName="sizeID" />
+                <ScalarProperty Name="sizeName" ColumnName="sizeName" />
+                <ScalarProperty Name="sizeFiyat" ColumnName="sizeFiyat" />
+                <ScalarProperty Name="urunID" ColumnName="urunID" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teklifs">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.Teklif">
+              <MappingFragment StoreEntitySet="Teklif">
+                <ScalarProperty Name="teklifID" ColumnName="teklifID" />
+                <ScalarProperty Name="teklifAdi" ColumnName="teklifAdi" />
+                <ScalarProperty Name="teklifResim" ColumnName="teklifResim" />
+                <ScalarProperty Name="teklifFiyat" ColumnName="teklifFiyat" />
+                <ScalarProperty Name="teklifAciklama" ColumnName="teklifAciklama" />
+                <ScalarProperty Name="teklifMiktar" ColumnName="teklifMiktar" />
+                <ScalarProperty Name="teklifStok" ColumnName="teklifStok" />
+                <ScalarProperty Name="teklifZaman" ColumnName="teklifZaman" />
+                <ScalarProperty Name="teklifGecerliGunSayisi" ColumnName="teklifGecerliGunSayisi" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="teklifHangiGun" ColumnName="teklifHangiGun" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uruns">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.Urun">
+              <MappingFragment StoreEntitySet="Urun">
+                <ScalarProperty Name="urunID" ColumnName="urunID" />
+                <ScalarProperty Name="urunAd" ColumnName="urunAd" />
+                <ScalarProperty Name="urunFiyat" ColumnName="urunFiyat" />
+                <ScalarProperty Name="urunResim" ColumnName="urunResim" />
+                <ScalarProperty Name="altKatID" ColumnName="altKatID" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="urunAciklama" ColumnName="urunAciklama" />
+                <ScalarProperty Name="urunMiktar" ColumnName="urunMiktar" />
+                <ScalarProperty Name="urunStok" ColumnName="urunStok" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="yetkiID" ColumnName="yetkiID" />
+                <ScalarProperty Name="userZaman" ColumnName="userZaman" />
+                <ScalarProperty Name="userDurum" ColumnName="userDurum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yetkis">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.Yetki">
+              <MappingFragment StoreEntitySet="Yetki">
+                <ScalarProperty Name="yetkiID" ColumnName="yetkiID" />
+                <ScalarProperty Name="yetkiAd" ColumnName="yetkiAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="masaKategoris">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.masaKategori">
+              <MappingFragment StoreEntitySet="masaKategori">
+                <ScalarProperty Name="isactive" ColumnName="isactive" />
+                <ScalarProperty Name="masaKatAdi" ColumnName="masaKatAdi" />
+                <ScalarProperty Name="masaKatID" ColumnName="masaKatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminAyars">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.AdminAyar">
+              <MappingFragment StoreEntitySet="AdminAyar">
+                <ScalarProperty Name="adminYoutube" ColumnName="adminYoutube" />
+                <ScalarProperty Name="adminLinkedIn" ColumnName="adminLinkedIn" />
+                <ScalarProperty Name="adminInstagram" ColumnName="adminInstagram" />
+                <ScalarProperty Name="adminFacebook" ColumnName="adminFacebook" />
+                <ScalarProperty Name="adminLogo2" ColumnName="adminLogo2" />
+                <ScalarProperty Name="adminFooter2" ColumnName="adminFooter2" />
+                <ScalarProperty Name="adminFooter1" ColumnName="adminFooter1" />
+                <ScalarProperty Name="adminLogo" ColumnName="adminLogo" />
+                <ScalarProperty Name="adminTitle1" ColumnName="adminTitle1" />
+                <ScalarProperty Name="adminAyarID" ColumnName="adminAyarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MusteriIsteks">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.MusteriIstek">
+              <MappingFragment StoreEntitySet="MusteriIstek">
+                <ScalarProperty Name="iconSinifAdi" ColumnName="iconSinifAdi" />
+                <ScalarProperty Name="musteriIstekAdi" ColumnName="musteriIstekAdi" />
+                <ScalarProperty Name="musteriIstekID" ColumnName="musteriIstekID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MusteriTaleps">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.MusteriTalep">
+              <MappingFragment StoreEntitySet="MusteriTalep">
+                <ScalarProperty Name="masaID" ColumnName="masaID" />
+                <ScalarProperty Name="musteriIstekID" ColumnName="musteriIstekID" />
+                <ScalarProperty Name="talepID" ColumnName="talepID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebAyars">
+            <EntityTypeMapping TypeName="ibernsof_RestoranModel.WebAyar">
+              <MappingFragment StoreEntitySet="WebAyar">
+                <ScalarProperty Name="ayarYoutube" ColumnName="ayarYoutube" />
+                <ScalarProperty Name="ayarGoogle" ColumnName="ayarGoogle" />
+                <ScalarProperty Name="ayarLinkedIn" ColumnName="ayarLinkedIn" />
+                <ScalarProperty Name="ayarInstagram" ColumnName="ayarInstagram" />
+                <ScalarProperty Name="ayarFacebook" ColumnName="ayarFacebook" />
+                <ScalarProperty Name="footerTitle" ColumnName="footerTitle" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="webAyarID" ColumnName="webAyarID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

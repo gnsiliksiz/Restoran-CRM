@@ -1,0 +1,70 @@
+﻿@model ibernsof_Restoran.Models.SizeProduct
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "AdminSizeProduct", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <section id="form-control-repeater">
+        <div class="row">
+            <!-- file repeater  -->
+            <div class="col-xl-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">
+                            <b>
+                               Ürün Porsiyon Düzenle
+                            </b>
+                        </h4>
+                    </div>
+
+                    <div class="card-content">
+                        <div class="card-body">
+                         
+                                @Html.HiddenFor(model => model.sizeID)
+                            <div class="row" >
+                                <div class="col-md-8 col-sm-6 form-group">
+                                    <label class="control-label col-md-6">Ürün Seç</label>
+
+                                    @Html.DropDownList("urunID", null, htmlAttributes: new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.urunID, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="col-md-8 col-sm-6 form-group">
+                                    <label class="control-label col-md-6"> Ürün Porsiyon Adı</label>
+                                    @Html.EditorFor(model => model.sizeName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sizeName, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-md-8 col-sm-6 form-group">
+                                    <label class="control-label col-md-6"> Fiyat</label>
+                                    @Html.EditorFor(model => model.sizeFiyat, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.sizeFiyat, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="col-md-8 col-sm-6 form-group">
+                                    <div class="card invoice-action-wrapper shadow-none border">
+
+                                        <div class="invoice-action-btn">
+                                            <button class="btn btn-light-success btn-block">
+                                                <i class="bx bxs-categories"><span> Guncelle</span></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /file repeater -->
+
+        </div>
+    </section>
+}

@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<!-- Page Title -->
+<div class="page-title bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 push-lg-4">
+                <h1 class="mb-0">Özel Teklifler</h1>
+
+                <h4 class="text-muted mb-0">Restoranımız hakkında bazı bilgiler</h4>
+
+                @if (!String.IsNullOrEmpty(Request.QueryString["qrhash"]))
+                {
+                    <h5 class="mb-0">   <span> Hosgeldin</span> @Session["MASANO"].ToString()</h5>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Page Content -->
+<div class="page-content bg-light">
+    <div class="container">
+        <!-- Special Offer -->
+        <div class="special-offer mb-5 animated" data-animation="fadeIn">
+            <img src="~/WebContent/assets/img/photos/special-burger.jpg" alt="" class="special-offer-image">
+            <div class="special-offer-content">
+                <h2 class="mb-2">Ücretsiz Burger</h2>
+                <h5 class="text-muted mb-5">40 ₺'dan yüksek siparişlerden ücretsiz hamburger alın!</h5>
+                <ul class="list-check text-lg mb-0">
+                    <li>Sadece Salı günleri</li>
+                    <li class="false">40 ₺'dan yüksek sipariş verin</li>
+                    <li>Bir burger sipariş etmedikçe</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Special Offer -->
+        <div class="special-offer mb-5 animated" data-animation="fadeIn">
+            <img src="~/WebContent/assets/img/photos/special-pizza.jpg" alt="" class="special-offer-image">
+            <div class="special-offer-content">
+                <h2 class="mb-2">Ücretsiz Küçük Pizza</h2>
+                <h5 class="text-muted mb-5">40 ₺'dan yüksek siparişlerden ücretsiz hamburger alın!</h5>
+                <ul class="list-check text-lg mb-0">
+                    <li>Sadece hafta sonlarında</li>
+                    <li class="false">40 ₺'dan yüksek sipariş verin</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Special Offer -->
+        <div class="special-offer mb-5 animated" data-animation="fadeIn">
+            <img src="~/WebContent/assets/img/photos/special-dish.jpg" alt="" class="special-offer-image">
+            <div class="special-offer-content">
+                <h2 class="mb-2">Chip Cuma</h2>
+                <h5 class="text-muted mb-5">Tüm yemekler için% 10 indirim!</h5>
+                <ul class="list-check text-lg mb-0">
+                    <li>Sadece Cuma günü</li>
+                    <li>Tüm ürünler</li>
+                    <li>Online sipariş</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

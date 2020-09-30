@@ -1,0 +1,264 @@
+﻿@model IList<ibernsof_Restoran.Models.CartItem>
+@{
+    ViewBag.Title = "TumSiparis";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/colors.css">
+<link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/components.css">
+<link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/themes/dark-layout.css">
+<link rel="stylesheet" type="text/css" href="~/Content/app-assets/css/themes/semi-dark-layout.css">
+
+
+<!--  Inverse table start -->
+<div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h5 class="content-header-title float-left pr-1 mb-0">Siparis Listesi</h5>
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb p-0 mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="../AdminHome/Index"><i class="bx bx-home-alt"></i></a>
+                        </li>
+
+                        <li class="breadcrumb-item active">
+                            Tum Siparislerim
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+
+    <div class="card-content">
+
+
+        <div class="content-body">
+
+
+            <section id="divider-colors">
+                <div class="divider divider-info">
+                    <div class="divider-text">Siparişlerim</div>
+                </div>
+            </section>
+
+        </div>
+
+
+        <table id="example2" class="table zero-configuration">
+            <thead>
+                <tr>
+
+
+                    <th>
+                        <span class="align-middle">Sipariş Detay</span>
+                    </th>
+
+
+                    <th>Siparis No</th>
+                    <th>Masa No </th>
+                    <th>Odeme Turu </th>
+                    <th>Siparis Durumu </th>
+
+                    <th>Odeme Durumu </th>
+                    <th>Odeme Onayı </th>
+                    <th>Sil</th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    @Html.Hidden("cartNo")
+                    var cartno = @item.cartNo;
+                    <tr>
+
+                        <td>
+                            <button type="button" class="btn btn-light-info btn-sm" onclick="@("window.location.href='"+Url.Action("TumSiparisDetay","AdminSiparis", new { cartNo = cartno }) + "'");"><i class="bx bx-show-alt"></i> </button>
+
+
+                        </td>
+
+
+
+                        <td>
+                            <span class="bullet bullet-info bullet-xs"></span>
+                            <small class="text-muted">@item.cartNo</small>
+                        </td>
+
+                        <td>
+                            <span class="bullet bullet-danger bullet-xs"></span>
+                            <small class="text-muted">@item.Masa.masaNo</small>
+                        </td>
+                        <td>
+
+
+                            @if (item.odemeTur == "nakit")
+                            {
+
+                                <small class="badge badge-light-success badge-pill">Nakit</small>
+                            }
+                            else
+                            {
+
+                                <small class="badge badge-light-warning badge-pill">
+                                    Pos
+
+                                </small>
+                            }
+
+                        </td>
+                        <td>
+                            @if (item.siparisonay == true)
+                            {
+                                <span class="badge badge-light-success badge-pill"><i class="bx bx-check">Teslim Edildi</i></span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light-warning badge-pill"><i class="bx bx-dna">Hazirlaniyor</i></span>
+                            }
+                        </td>
+
+                        <td>
+                            @if (item.onay == true)
+                            {
+                                <span class="badge badge-light-success badge-pill"><i class="bx bx-check">Odendi</i></span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-light-warning badge-pill"><i class="bx bx-error">Odenmedi</i></span>
+                            }
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-light-danger btn-sm" data-toggle="modal" data-target="#OdenmediOnayConfirmation" onclick="OdenmediOnayRecord(@item.cartNo)">Onayla!</button>
+                        </td>
+
+                        <td>
+                            <button type="button" class="btn btn-light-danger btn-sm" data-toggle="modal" data-target="#DeleteConfirmation" onclick="DeleteSiparisRecord(@item.cartNo)"><i class="bx bx-trash-alt"> Sil</i></button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+</div>
+
+
+<!-- BEGIN: Page Vendor JS-->
+
+<script src="~/Content/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+<script src="~/Content/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+<script src="~/Content/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js"></script>
+<script src="~/Content/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js"></script>
+<script src="~/Content/app-assets/vendors/js/tables/datatable/responsive.bootstrap.min.js"></script>
+<!-- END: Page Vendor JS-->
+<!-- BEGIN: Page JS-->
+<script src="~/Content/app-assets/js/scripts/pages/app-invoice.js"></script>
+<!-- END: Page JS-->
+<script src="~/Content/app-assets/vendors/js/vendors.min.js"></script>
+<script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+<script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+<script src="~/Content/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+<!-- DELETE MODAL -->
+<div class="modal fade" id="DeleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Siparis Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Seçilen siparisi silmek istediğinize emin misiniz ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Iptal</button>
+                <button type="button" class="btn btn-danger" onclick="ConfirmDelete()">Onayla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    //Show The Popup Modal For DeleteComfirmation
+    var silinecekSiparis = 0;
+    var DeleteSiparisRecord = function (cartNo) {
+        silinecekSiparis = cartNo;
+        $("#cartNo").val(cartNo);
+        $("#DeleteConfirmation").modal("show");
+    }
+    var ConfirmDelete = function () {
+        alert(silinecekSiparis);
+        $.ajax({
+            type: "POST",
+            url: "/AdminSiparis/DeleteSiparisRecord?cartNo=" + silinecekSiparis,
+            success: function (result) {
+                alert("Silme islemi Basarili!..");
+                window.location.href = "/AdminSiparis/TumSiparis";
+                $("#DeleteConfirmation").modal("hide");
+                $("#modal .close").click();
+            }
+        })
+    }
+</script>
+
+<div class="modal fade" id="OdenmediOnayConfirmation" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Siparis Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Seçilen ödeme durumunu değiştirmek istediğinize emin misiniz ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Iptal</button>
+                <button type="button" class="btn btn-danger" onclick="ConfirmOdenmediOnay()">Onayla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    //Show The Popup Modal For DeleteComfirmation
+    var onayCartNo = 0;
+    var OdenmediOnayRecord = function (cartNo) {
+        $("#cartNo").val(cartNo);
+        onayCartNo = cartNo;
+        $("#OdenmediOnayConfirmation").modal("show");
+    }
+    var ConfirmOdenmediOnay = function () {
+        var cartNo = $("#cartNo").val();
+        alert(onayCartNo);
+        $.ajax({
+            type: "POST",
+            url: "/AdminSiparis/OdenmediOnayRecord?cartNo=" + onayCartNo,
+            success: function (result) {
+                alert("Ödeme Durumu Basarili!..");
+                window.location.href = "/AdminSiparis/TumSiparis";
+                $("#OdenmediOnayConfirmation").modal("hide");
+                $("#modal .close").click();
+            }
+        })
+    }
+</script>

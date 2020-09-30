@@ -1,0 +1,120 @@
+﻿@using ibernsof_Restoran.Models
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumb-wrapper col-12">
+    <ol class="breadcrumb p-0 mb-0">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index","AdminHome")"><i class="bx bx-home-alt"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active">
+            Ürün Porsiyon/içerik
+        </li>
+    </ol>
+</div>
+<br />
+
+<div class="col-xl-3 col-md-4 col-3" align="right">
+    <div class="card invoice-action-wrapper shadow-none border">
+
+        <div class="invoice-action-btn">
+            <button class="btn btn-light-primary btn-block">
+                <a href="/AdminSizeProduct/Create/"   <i class="bx bxs-categories"><span>Yeni Porsiyon/içerik Ekle</span></i></a>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+@Html.Hidden("sizeID")
+<!-- table strip dark -->
+<div class="table-responsive">
+    <table class="table table-striped mb-0">
+        <thead>
+            <tr>
+                <th>Ürün Adı</th>
+                <th>Boyut/içerik Adı</th>
+                <th>Fiyat</th>
+
+                <th>DÜZENLE/SİL</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td>
+                        <span class="bullet bullet-info bullet-xs"></span>
+                        <small class="text-muted">@item.Urun.urunAd</small>
+                    </td>
+                    <td>
+                        <span class="bullet bullet-info bullet-xs"></span>
+                        <small class="text-muted"> @item.sizeName</small>
+                    </td>
+                    <td>
+                        <span class="bullet bullet-info bullet-xs"></span>
+                        <small class="text-muted"> @Convert.ToDouble(item.sizeFiyat) ₺</small>
+                    </td>
+
+
+                    <td>
+                        <button type="button" class="btn btn-light-danger btn-sm" data-toggle="modal" data-target="#DeleteSizeProductConfirmation" onclick="DeleteSizeProductRecord(@item.sizeID)"><i class="bx bx-trash-alt"></i></button>
+                        <button type="button" class="btn btn-light-info btn-sm" onclick="@("window.location.href='"+Url.Action("Edit","AdminSizeProduct", new { sizeID = item.sizeID }) + "'");"><i class="bx bx-pencil"></i> </button>
+                    </td>
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- DELETE MODAL -->
+<div class="modal fade" id="DeleteSizeProductConfirmation" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Extra urun Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Seçilen  urun boyutunu silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                <button type="button" class="btn btn-danger" onclick="ConfirmBoyutDelete()">Onayla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    //Show The Popup Modal For DeleteComfirmation
+    var DeleteSizeProductRecord = function (sizeID) {
+        $("#sizeID").val(sizeID);
+        $("#DeleteSizeProductConfirmation").modal("show");
+    }
+    var ConfirmBoyutDelete = function () {
+        var sizeID = $("#sizeID").val();
+        $.ajax({
+            type: "POST",
+            url: "/AdminSizeProduct/DeleteBoyutUrunRecord?sizeID=" + sizeID,
+            success: function (result) {
+                alert("Silme islemi Basarili!..");
+                window.location.href = "/AdminSizeProduct/Index";
+                $("#DeleteSizeProductConfirmation").modal("hide");
+                $("#modal .close").click();
+            }
+        })
+    }
+</script>
+

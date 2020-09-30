@@ -1,0 +1,96 @@
+﻿@model IList<ibernsof_Restoran.Models.Urun>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="content-header row">
+    <div class="content-header-left col-12 mb-2 mt-1">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h5 class="content-header-title float-left pr-1 mb-0">Siparislerim</h5>
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb p-0 mb-0">
+                        <li class="breadcrumb-item">
+                            <a href="../AdminHome/Index"><i class="bx bx-home-alt"></i></a>
+                        </li>
+
+                        <li class="breadcrumb-item active">
+                            Gelen SiparisLerim
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+
+
+    <div class="content-body">
+
+
+        <section id="divider-colors">
+            <div class="divider divider-info">
+                <div class="divider-text">Siparişlerim</div>
+            </div>
+        </section>
+
+    </div>
+    <div class="card-body">
+
+        <table id="example2" class="table zero-configuration">
+            <thead>
+                <tr>
+
+
+                    @*<th>Kategori</th>*@
+                    <th>Urun Adi</th>
+
+                    <th>Urun Kalan Miktari </th>
+
+                    <th> Duzenle</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {@Html.Hidden("urunID")
+
+
+                <tr>
+                    @*<td>@ViewBag.altKatAdi</td>*@
+                    <td>
+                        <span class="bullet bullet-info bullet-xs"></span>
+                        <small class="text-muted">@item.urunAd</small>
+                    </td>
+
+
+
+                    <td>
+                        <span class="bullet bullet-danger bullet-xs"></span>
+                        <small class="text-muted">@item.urunStok</small>
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn btn-light-info btn-xs" style="width:5%;" onclick="@("window.location.href='"+Url.Action("Edit","AdminStok", new { urunID = item.urunID }) + "'");"><i class="bx bx-edit mt-0"></i> </button>
+
+                    </td>
+
+
+                </tr>
+            }
+            </tbody>
+        </table>
+
+
+
+    </div>
+
+</div>
+
+
+
+
+

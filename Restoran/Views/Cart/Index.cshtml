@@ -1,0 +1,167 @@
+﻿@model ibernsof_Restoran.Models.CartItem
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+
+<section class="section bg-light">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-4 push-xl-8 col-lg-5 push-lg-7">
+                <div class="shadow bg-white stick-to-content mb-4">
+                    <div class="bg-dark dark p-4"><h5 class="mb-0">Senin Siparişin</h5></div>
+                    <table class="table-cart">
+                        @if (ViewBag.carts != null)
+                        {
+                            foreach (var item in ViewBag.carts as List
+                            <ibernsof_Restoran.Models.CartModel>
+                                )
+                            {
+                                <tr>
+                                    <td class="title">
+                                        <span class="name"><a href="#productModal" data-toggle="modal"></a>@item.Urun.urunAd</span>
+                                    </td>
+                                    <td class="price">x @item.Quantity</td>
+                                    <td class="price">@item.NewPrice</td>
+                                    <td class="actions">
+
+                                        <a href="#" class="action-icon deleteCart" data-pID="@item.urunID"><i class="ti ti-close"></i></a>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                        else
+                        {
+                            <tr>
+                                <td class="price">Sepet Boş</td>
+                            </tr>
+                        }
+
+                    </table>
+                    <div class="cart-summary">
+
+
+                        <div class="row text-md">
+                            <div class="col-7 text-right text-muted">Total:</div>
+                            <div class="col-5"><strong>@ViewBag.totalprice ₺ </strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-xl-8 pull-xl-4 col-lg-7 pull-lg-5">
+                @using (Html.BeginForm("AddSepet", "Cart", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="bg-white p-4 p-md-5 mb-4">
+                        <h4 class="border-bottom pb-5"><i class="ti ti-wallet mr-3 text-primary"></i>Ödeme</h4>
+                        <div class="row mb-10">
+
+                            <div class="col-md-3 col-sm-4 form-group">
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" name="odemeTur" value="nakit" class="custom-control-input" onchange="changeEvent(this)" id="odemeTur">
+
+                                    <span class="custom-control-indicator"></span>&nbsp;&nbsp;
+                                    <span class="custom-control-description">Nakit</span>
+                                </label>
+                            </div>
+
+                            <div class="col-md-3 col-sm-4 form-group">
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" name="odemeTur" value="pos" class="custom-control-input" onchange="changeEvent(this)" id="odemeTur">
+
+
+                                    <span class="custom-control-indicator"></span>&nbsp;&nbsp;
+                                    <span class="custom-control-description">Pos</span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="text-center">
+
+                        <button class="btn btn-primary btn-lg" value="Ekle" onclick="SendNotification()"><span>Ödemeyi onayla!</span></button>
+                    </div>
+                    @*<div class="text-center">
+                            @Html.ActionLink("< Alisverise devam et!", "Index", "Home")
+                        </div>*@
+                }
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+    var dataList = [];
+     var changeEvent = function (e){
+
+        var data = {};
+        if (e.checked) {
+            data = {
+
+                 BildirimTur: '2',
+                  Bildirimİcerik : e.value,
+                BildirimDurum: false
+
+
+            }
+
+            dataList.push(data);
+        }
+    }
+    var SendNotification = function () {
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("AddNotification", "Cart")',
+            data: { 'model': dataList},
+            success: function (result) {
+                 if (dataList.length <= 0) {
+                    swal("Başarısız!", "Odeme Basarisiz.", "error");
+                } else {
+                      swal("Başarılı!", "Odeme Onaylandi.", "success");
+                     setTimeout(function () { /*window.location = "/Cart/Complete/";*/
+                     $.post('/Cart/Complete/' + id);}, 1500)
+                console.log(result);
+                }
+
+
+                },
+            error: function () {
+                console.log("error.");
+
+            }
+
+        });
+
+    }
+</script>
+
+<script type="text/javascript">
+    $(function () {
+
+
+        $(".deleteCart").on("click", function () {
+            var urunID = $(this).attr("data-pID");
+            $.post("/Cart/DeleteUrun?urunID=" + urunID, function (data) {
+                swal("Başarılı!", "Urun Sepetten silindi.", "success");
+                setTimeout(function () { location.reload(); }, 1500)
+                console.log(data);
+            });
+        });
+    });
+</script>

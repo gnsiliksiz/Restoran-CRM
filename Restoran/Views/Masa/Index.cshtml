@@ -1,0 +1,98 @@
+﻿@model IList<ibernsof_Restoran.Models.Masa>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="breadcrumb-wrapper col-12">
+    <ol class="breadcrumb p-0 mb-0">
+        <li class="breadcrumb-item">
+            <a href="@Url.Action("Index","AdminHome")"><i class="bx bx-home-alt"></i></a>
+        </li>
+
+        <li class="breadcrumb-item active">
+            Masa Listesi
+        </li>
+    </ol>
+</div>
+<br />
+
+<div class="col-xl-3 col-md-4 col-12">
+    <div class="card invoice-action-wrapper shadow-none border">
+
+        <div class="invoice-action-btn">
+            <button class="btn btn-light-primary btn-block">
+                <a href="/Masa/Create/" >  <i class="bx bx-barcode"><span>Yeni Masa Ekle</span></i></a>
+            </button>
+        </div>
+    </div>
+</div>
+
+<br />
+
+
+@Html.Hidden("masaID")
+<div class="container">
+    <div class="row">
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+
+                <div class="col-md-4 col-lg-3 col-sm-6">
+                    <div class="card" style="border-radius: 10px;">
+                        <img class="card-img-top" src="@Url.Content(item.qrFoto)" alt="Card image" style="width:100%; height:200px; object-fit:cover; border-radius: 10px">
+                        <div class="card-body">
+                            <h4 class="card-title"><strong>@item.masaNo</strong></h4>
+                            <p class="card-text">@item.masaKategori.masaKatAdi</p>
+                            <button type="button" class="btn btn-light-danger btn-sm" data-toggle="modal" data-target="#DeleteConfirmation" onclick="DeleteMasaRecord(@item.masaID)"><i class="fas fa-trash"></i> Sil</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+    </div>
+</div>
+
+<div class="modal fade" id="DeleteConfirmation" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModal">Bildirimi Sil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> Seçilen masa kaydını silmek istediğinize emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light-secondary" data-dismiss="modal">İptal</button>
+                <button type="button" class="btn btn-light-danger" onclick="ConfirmDelete()">Onayla</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    //Show The Popup Modal For DeleteComfirmation
+    var DeleteMasaRecord = function (masaID) {
+        $("#masaID").val(masaID);
+        $("#DeleteConfirmation").modal("show");
+    }
+    var ConfirmDelete = function () {
+        var masaID = $("#masaID").val();
+        $.ajax({
+            type: "POST",
+            url: "/Masa/DeleteMasaRecord?masaID=" + masaID,
+            success: function (result) {
+                alert("Silme işlemi başarılı!");
+                window.location.href = "/Masa/Index";
+                $("#DeleteConfirmation").modal("hide");
+                $("#modal .close").click();
+            }
+        })
+    }
+</script>
